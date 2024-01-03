@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm Nlang Essama Victor Dexter</h1>
-<h3 align="center">Passionate about coding, I can work on diverse missions and at different levels of the technology stack of a project, from the creation to the maintenance of software, either overall or on certain aspects in accordance with the specifications.</h3>
+<h3 align="center">Passionate about code, I am a full stack developer, Spring Boot Java Backend microservices, Angular, Test Automation and DevOps, I can work on diverse missions and at different levels of the technology stack of a project, from creation to maintenance of software, either in its entirety or on certain aspects in accordance with the specifications.</h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=dexdevnl2023&label=Profile%20views&color=0e75b6&style=flat" alt="dexdevnl2023" /> </p>
 
