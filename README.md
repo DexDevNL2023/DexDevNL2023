@@ -1,3 +1,18 @@
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+</style>
 <h1 align="center">Hi 👋, I'm Nlang Essama Victor Dexter</h1>
 <h3 align="center">Passionate about code, I am a full stack developer, Spring Boot Java Backend microservices, Angular, Test Automation and DevOps, I can work on diverse missions and at different levels of the technology stack of a project, from creation to maintenance of software, either in its entirety or on certain aspects in accordance with the specifications.</h3>
 
@@ -31,7 +46,7 @@
 
 <h3 align="left">Languages and Tools:</h3>
 <div class="card">
-  <a href="https://angular.io" target="_blank" rel="noreferrer"> <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="angular" style="width:100%"/> </a>
+  <a href="https://angular.io" target="_blank" rel="noreferrer"> <img src="https://angular.io/assets/images/logos/angular/angular.svg" alt="angular" width="60" height="60"/> </a>
   <div class="container">
     <h4><b>Angular</b></h4>
     <p>Architect & Engineer</p>
