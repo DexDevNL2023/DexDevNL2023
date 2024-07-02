@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (notification()) {
+      <div>
+        <h2 data-cy="notificationDetailsHeading">
+          <span jhiTranslate="proxyApp.userManagementNotification.detail.title">Notification</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ notification()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementNotification.message">Message</span></dt>
+          <dd>
+            <span>{{ notification()!.message }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementNotification.dateEnvoi">Date Envoi</span></dt>
+          <dd>
+            <span>{{ notification()!.dateEnvoi | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementNotification.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.NotificationType.' + (notification()!.type ?? 'null')">{{
+              { null: '', PAIEMENT: 'PAIEMENT', RENOUVELLEMENT: 'RENOUVELLEMENT', SINISTRE: 'SINISTRE' }[notification()!.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementNotification.utilisateur">Utilisateur</span></dt>
+          <dd>
+            @if (notification()!.utilisateur) {
+              <div>
+                <a [routerLink]="['/utilisateur', notification()!.utilisateur?.id, 'view']">{{ notification()!.utilisateur?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/notification', notification()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

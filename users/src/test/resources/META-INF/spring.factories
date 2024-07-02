@@ -1,0 +1,3 @@
+org.springframework.test.context.ContextCustomizerFactory = com.teleo.users.\
+    config.SqlTestContainersSpringContextCustomizerFactory,com.teleo.users.\
+    config.KafkaTestContainersSpringContextCustomizerFactory

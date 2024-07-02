@@ -1,0 +1,165 @@
+<div>
+  <h2 id="page-heading" data-cy="RapportHeading">
+    <span jhiTranslate="proxyApp.insuranceManagementRapport.home.title">Rapports</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="proxyApp.insuranceManagementRapport.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-rapport"
+        [routerLink]="['/rapport/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="proxyApp.insuranceManagementRapport.home.createLabel">Create a new Rapport</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="proxyApp.insuranceManagementRapport.home.search"
+          >Search for Rapport</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'proxyApp.insuranceManagementRapport.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (rapports?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="proxyApp.insuranceManagementRapport.home.notFound">No Rapports found</span>
+    </div>
+  }
+
+  @if (rapports && rapports.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="titre">
+              <div class="d-flex">
+                <span jhiTranslate="proxyApp.insuranceManagementRapport.titre">Titre</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="proxyApp.insuranceManagementRapport.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="proxyApp.insuranceManagementRapport.type">Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateGeneration">
+              <div class="d-flex">
+                <span jhiTranslate="proxyApp.insuranceManagementRapport.dateGeneration">Date Generation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="url">
+              <div class="d-flex">
+                <span jhiTranslate="proxyApp.insuranceManagementRapport.url">Url</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="assurance.id">
+              <div class="d-flex">
+                <span jhiTranslate="proxyApp.insuranceManagementRapport.assurance">Assurance</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (rapport of rapports; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/rapport', rapport.id, 'view']">{{ rapport.id }}</a>
+              </td>
+              <td>{{ rapport.titre }}</td>
+              <td>{{ rapport.description }}</td>
+              <td [jhiTranslate]="'proxyApp.RapportType.' + (rapport.type ?? 'null')">
+                {{ { null: '', PERFORMANCE: 'PERFORMANCE', PAIEMENT: 'PAIEMENT', SINISTRE: 'SINISTRE' }[rapport.type ?? 'null'] }}
+              </td>
+              <td>{{ rapport.dateGeneration | formatMediumDatetime }}</td>
+              <td>{{ rapport.url }}</td>
+              <td>
+                @if (rapport.assurance) {
+                  <div>
+                    <a [routerLink]="['/assurance', rapport.assurance.id, 'view']">{{ rapport.assurance.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/rapport', rapport.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/rapport', rapport.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(rapport)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

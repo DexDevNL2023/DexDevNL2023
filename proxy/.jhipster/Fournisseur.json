@@ -1,0 +1,66 @@
+{
+  "annotations": {
+    "changelogDate": "20240702124337"
+  },
+  "applications": ["proxy", "claims"],
+  "clientRootFolder": "claimManagement",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "addresse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "ville",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pays",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "servicesFournis",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebutContrat",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFinContrat",
+      "fieldType": "Instant"
+    }
+  ],
+  "microserviceName": "claimManagement",
+  "name": "Fournisseur",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

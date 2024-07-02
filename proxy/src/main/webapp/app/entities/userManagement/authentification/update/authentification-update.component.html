@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-authentification-heading"
+        data-cy="AuthentificationCreateUpdateHeading"
+        jhiTranslate="proxyApp.userManagementAuthentification.home.createOrEditLabel"
+      >
+        Create or edit a Authentification
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="proxyApp.userManagementAuthentification.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateConnexion" jhiTranslate="proxyApp.userManagementAuthentification.dateConnexion"
+            >Date Connexion</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateConnexion"
+              data-cy="dateConnexion"
+              type="datetime-local"
+              class="form-control"
+              name="dateConnexion"
+              formControlName="dateConnexion"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (editForm.get('dateConnexion')!.invalid && (editForm.get('dateConnexion')!.dirty || editForm.get('dateConnexion')!.touched)) {
+            <div>
+              @if (editForm.get('dateConnexion')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateConnexion')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ipAdresse" jhiTranslate="proxyApp.userManagementAuthentification.ipAdresse"
+            >Ip Adresse</label
+          >
+          <input type="text" class="form-control" name="ipAdresse" id="field_ipAdresse" data-cy="ipAdresse" formControlName="ipAdresse" />
+          @if (editForm.get('ipAdresse')!.invalid && (editForm.get('ipAdresse')!.dirty || editForm.get('ipAdresse')!.touched)) {
+            <div>
+              @if (editForm.get('ipAdresse')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

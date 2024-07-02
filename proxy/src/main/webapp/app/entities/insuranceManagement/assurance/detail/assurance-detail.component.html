@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (assurance()) {
+      <div>
+        <h2 data-cy="assuranceDetailsHeading"><span jhiTranslate="proxyApp.insuranceManagementAssurance.detail.title">Assurance</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ assurance()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementAssurance.nom">Nom</span></dt>
+          <dd>
+            <span>{{ assurance()!.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementAssurance.description">Description</span></dt>
+          <dd>
+            <span>{{ assurance()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementAssurance.conditions">Conditions</span></dt>
+          <dd>
+            <span>{{ assurance()!.conditions }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementAssurance.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.InsuranceType.' + (assurance()!.type ?? 'null')">{{
+              { null: '', PERSONNE: 'PERSONNE', BIEN: 'BIEN', AGRICOLE: 'AGRICOLE' }[assurance()!.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementAssurance.prixAssurance">Prix Assurance</span></dt>
+          <dd>
+            <span>{{ assurance()!.prixAssurance }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementAssurance.dateDebut">Date Debut</span></dt>
+          <dd>
+            <span>{{ assurance()!.dateDebut | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementAssurance.dateFin">Date Fin</span></dt>
+          <dd>
+            <span>{{ assurance()!.dateFin | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementAssurance.garantie">Garantie</span></dt>
+          <dd>
+            @for (garantie of assurance()!.garanties; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/garantie', garantie.id, 'view']">{{ garantie?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/assurance', assurance()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

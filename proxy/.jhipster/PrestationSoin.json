@@ -1,0 +1,50 @@
+{
+  "annotations": {
+    "changelogDate": "20240702124437"
+  },
+  "applications": ["proxy", "claims"],
+  "clientRootFolder": "claimManagement",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "PrestationType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CONSULTATION,HOSPITALISATION,SOINS_PARAMEDICAUX,RADIOLOGIE,ANALYSES_LABORATOIRE,PHARMACIE,CHIRURGIE,URGENCES,SOINS_DENTAIRES,SOINS_OCULAIRES,MATERNITE,REEDUCATION,PSYCHOTHERAPIE,SOINS_A_DOMICILE,AMBULANCE,VACCINATION,TELEMEDECINE,NUTRITION,PHYSIOTHERAPIE"
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "claimManagement",
+  "name": "PrestationSoin",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "financeurSoin",
+      "relationshipName": "financeurSoin",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "financeurSoin",
+      "relationshipName": "financeurSoin",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

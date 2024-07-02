@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (garantie()) {
+      <div>
+        <h2 data-cy="garantieDetailsHeading"><span jhiTranslate="proxyApp.insuranceManagementGarantie.detail.title">Garantie</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ garantie()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementGarantie.description">Description</span></dt>
+          <dd>
+            <span>{{ garantie()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementGarantie.dateDebut">Date Debut</span></dt>
+          <dd>
+            <span>{{ garantie()!.dateDebut | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementGarantie.dateFin">Date Fin</span></dt>
+          <dd>
+            <span>{{ garantie()!.dateFin | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementGarantie.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.GarantieStatus.' + (garantie()!.status ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', EXPIREE: 'EXPIREE', SUSPENDUE: 'SUSPENDUE' }[garantie()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementGarantie.assurance">Assurance</span></dt>
+          <dd>
+            @for (assurance of garantie()!.assurances; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/assurance', assurance.id, 'view']">{{ assurance?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/garantie', garantie()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (policesAssurances()) {
+      <div>
+        <h2 data-cy="policesAssurancesDetailsHeading">
+          <span jhiTranslate="proxyApp.insuranceManagementPolicesAssurances.detail.title">Polices Assurances</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ policesAssurances()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementPolicesAssurances.numeroPolice">Numero Police</span></dt>
+          <dd>
+            <span>{{ policesAssurances()!.numeroPolice }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementPolicesAssurances.dateEmission">Date Emission</span></dt>
+          <dd>
+            <span>{{ policesAssurances()!.dateEmission | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementPolicesAssurances.dateExpiration">Date Expiration</span></dt>
+          <dd>
+            <span>{{ policesAssurances()!.dateExpiration | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementPolicesAssurances.description">Description</span></dt>
+          <dd>
+            <span>{{ policesAssurances()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementPolicesAssurances.montantAssure">Montant Assure</span></dt>
+          <dd>
+            <span>{{ policesAssurances()!.montantAssure }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementPolicesAssurances.plafondAssure">Plafond Assure</span></dt>
+          <dd>
+            <span>{{ policesAssurances()!.plafondAssure }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementPolicesAssurances.assurance">Assurance</span></dt>
+          <dd>
+            @if (policesAssurances()!.assurance) {
+              <div>
+                <a [routerLink]="['/assurance', policesAssurances()!.assurance?.id, 'view']">{{ policesAssurances()!.assurance?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/polices-assurances', policesAssurances()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

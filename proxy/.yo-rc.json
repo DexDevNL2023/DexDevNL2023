@@ -1,0 +1,48 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "gateway",
+    "applications": {
+      "claimManagement": {},
+      "insuranceManagement": {},
+      "userManagement": {}
+    },
+    "authenticationType": "jwt",
+    "baseName": "proxy",
+    "clientFramework": "angular",
+    "devServerPort": 4200,
+    "entities": [
+      "Utilisateur",
+      "MedicalRecord",
+      "MedicalDocument",
+      "Notification",
+      "Authentification",
+      "Assurance",
+      "Garantie",
+      "Rapport",
+      "PolicesAssurances",
+      "Souscription",
+      "Paiement",
+      "Sinistre",
+      "DocumentDeSinistre",
+      "Reclamation",
+      "Fournisseur",
+      "PrestationSoin",
+      "FinanceurSoin"
+    ],
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "ZWIyMDQ4NTA1NjdlYWZhN2U4ZDVmZWU0MWVhNDIxNTMwZjJmZDU4YTYyN2VkY2ZmOTYzMWQwZThkZDBkOWQ2MGFmYjVjNjMzMDJjOTVhYjdkZjVkNGI0MmE1Nzk5Y2I2ZWQyNjg2ODFlZmFlMzYxODMwMDVmOTE1MWI2YjY0YjI=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1719924337000,
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/teleo/proxy",
+    "packageName": "com.teleo.proxy",
+    "prodDatabaseType": "mysql",
+    "reactive": true,
+    "serverPort": "9000",
+    "serviceDiscoveryType": "consul",
+    "skipCommitHook": true
+  }
+}

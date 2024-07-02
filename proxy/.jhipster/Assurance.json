@@ -1,0 +1,58 @@
+{
+  "annotations": {
+    "changelogDate": "20240702123437"
+  },
+  "applications": ["proxy", "insurances"],
+  "clientRootFolder": "insuranceManagement",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "conditions",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "InsuranceType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PERSONNE,BIEN,AGRICOLE"
+    },
+    {
+      "fieldName": "prixAssurance",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "insuranceManagement",
+  "name": "Assurance",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "garantie",
+      "relationshipName": "garantie",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}
