@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (authentification()) {
+      <div>
+        <h2 data-cy="authentificationDetailsHeading">
+          <span jhiTranslate="proxyApp.userManagementAuthentification.detail.title">Authentification</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ authentification()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementAuthentification.dateConnexion">Date Connexion</span></dt>
+          <dd>
+            <span>{{ authentification()!.dateConnexion | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementAuthentification.ipAdresse">Ip Adresse</span></dt>
+          <dd>
+            <span>{{ authentification()!.ipAdresse }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/authentification', authentification()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

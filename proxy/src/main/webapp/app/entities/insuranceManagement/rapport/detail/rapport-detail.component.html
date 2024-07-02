@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (rapport()) {
+      <div>
+        <h2 data-cy="rapportDetailsHeading"><span jhiTranslate="proxyApp.insuranceManagementRapport.detail.title">Rapport</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ rapport()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementRapport.titre">Titre</span></dt>
+          <dd>
+            <span>{{ rapport()!.titre }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementRapport.description">Description</span></dt>
+          <dd>
+            <span>{{ rapport()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementRapport.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.RapportType.' + (rapport()!.type ?? 'null')">{{
+              { null: '', PERFORMANCE: 'PERFORMANCE', PAIEMENT: 'PAIEMENT', SINISTRE: 'SINISTRE' }[rapport()!.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementRapport.dateGeneration">Date Generation</span></dt>
+          <dd>
+            <span>{{ rapport()!.dateGeneration | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementRapport.url">Url</span></dt>
+          <dd>
+            <span>{{ rapport()!.url }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementRapport.assurance">Assurance</span></dt>
+          <dd>
+            @if (rapport()!.assurance) {
+              <div>
+                <a [routerLink]="['/assurance', rapport()!.assurance?.id, 'view']">{{ rapport()!.assurance?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/rapport', rapport()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

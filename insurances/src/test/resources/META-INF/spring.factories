@@ -1,0 +1,3 @@
+org.springframework.test.context.ContextCustomizerFactory = com.teleo.\
+    insurances.config.SqlTestContainersSpringContextCustomizerFactory,com.teleo.\
+    insurances.config.KafkaTestContainersSpringContextCustomizerFactory

@@ -1,0 +1,23 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 1,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "users",
+    "entities": [],
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "YzhhODVjNTY5NTgzYjA4OWExZTAzOTEwNmUzNmNjMzUxNmE4MGZiOTNiMGQxZmE4YWJlZWMwNzZlYWMzNWExZmI4Y2JjNWFiYzhjMzNlNjk5OTg0ODhhMGJmYTMyOTNiYTgxYzlmMmViOWQ3MmQ1Y2YyMjZlMTNlOTEyZGMxNTU=",
+    "languages": ["en"],
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/teleo/users",
+    "packageName": "com.teleo.users",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "9001",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true
+  }
+}

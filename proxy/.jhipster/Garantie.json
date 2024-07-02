@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20240702123537"
+  },
+  "applications": ["proxy", "insurances"],
+  "clientRootFolder": "insuranceManagement",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "GarantieStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,EXPIREE,SUSPENDUE"
+    }
+  ],
+  "microserviceName": "insuranceManagement",
+  "name": "Garantie",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

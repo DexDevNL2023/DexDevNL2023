@@ -1,0 +1,49 @@
+{
+  "annotations": {
+    "changelogDate": "20240702123637"
+  },
+  "applications": ["proxy", "insurances"],
+  "clientRootFolder": "insuranceManagement",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "titre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "RapportType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PERFORMANCE,PAIEMENT,SINISTRE"
+    },
+    {
+      "fieldName": "dateGeneration",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "insuranceManagement",
+  "name": "Rapport",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "assurance",
+      "relationshipName": "assurance",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

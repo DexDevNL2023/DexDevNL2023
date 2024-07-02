@@ -1,0 +1,303 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-utilisateur-heading"
+        data-cy="UtilisateurCreateUpdateHeading"
+        jhiTranslate="proxyApp.userManagementUtilisateur.home.createOrEditLabel"
+      >
+        Create or edit a Utilisateur
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="proxyApp.userManagementUtilisateur.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numNiu" jhiTranslate="proxyApp.userManagementUtilisateur.numNiu">Num Niu</label>
+          <input type="text" class="form-control" name="numNiu" id="field_numNiu" data-cy="numNiu" formControlName="numNiu" />
+          @if (editForm.get('numNiu')!.invalid && (editForm.get('numNiu')!.dirty || editForm.get('numNiu')!.touched)) {
+            <div>
+              @if (editForm.get('numNiu')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nom" jhiTranslate="proxyApp.userManagementUtilisateur.nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          @if (editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)) {
+            <div>
+              @if (editForm.get('nom')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prenom" jhiTranslate="proxyApp.userManagementUtilisateur.prenom">Prenom</label>
+          <input type="text" class="form-control" name="prenom" id="field_prenom" data-cy="prenom" formControlName="prenom" />
+          @if (editForm.get('prenom')!.invalid && (editForm.get('prenom')!.dirty || editForm.get('prenom')!.touched)) {
+            <div>
+              @if (editForm.get('prenom')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="proxyApp.userManagementUtilisateur.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('email')?.errors?.pattern) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Email' }"
+                  >This field should follow pattern for Email.</small
+                >
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_motDePasse" jhiTranslate="proxyApp.userManagementUtilisateur.motDePasse">Mot De Passe</label>
+          <input
+            type="text"
+            class="form-control"
+            name="motDePasse"
+            id="field_motDePasse"
+            data-cy="motDePasse"
+            formControlName="motDePasse"
+          />
+          @if (editForm.get('motDePasse')!.invalid && (editForm.get('motDePasse')!.dirty || editForm.get('motDePasse')!.touched)) {
+            <div>
+              @if (editForm.get('motDePasse')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateNaissance" jhiTranslate="proxyApp.userManagementUtilisateur.dateNaissance"
+            >Date Naissance</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateNaissance"
+              data-cy="dateNaissance"
+              type="datetime-local"
+              class="form-control"
+              name="dateNaissance"
+              formControlName="dateNaissance"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (editForm.get('dateNaissance')!.invalid && (editForm.get('dateNaissance')!.dirty || editForm.get('dateNaissance')!.touched)) {
+            <div>
+              @if (editForm.get('dateNaissance')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateNaissance')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numCni" jhiTranslate="proxyApp.userManagementUtilisateur.numCni">Num Cni</label>
+          <input type="text" class="form-control" name="numCni" id="field_numCni" data-cy="numCni" formControlName="numCni" />
+          @if (editForm.get('numCni')!.invalid && (editForm.get('numCni')!.dirty || editForm.get('numCni')!.touched)) {
+            <div>
+              @if (editForm.get('numCni')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sexe" jhiTranslate="proxyApp.userManagementUtilisateur.sexe">Sexe</label>
+          <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe">
+            <option [ngValue]="null">{{ 'proxyApp.Gender.null' | translate }}</option>
+            @for (gender of genderValues; track $index) {
+              <option [value]="gender">{{ 'proxyApp.Gender.' + gender | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('sexe')!.invalid && (editForm.get('sexe')!.dirty || editForm.get('sexe')!.touched)) {
+            <div>
+              @if (editForm.get('sexe')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_telephone" jhiTranslate="proxyApp.userManagementUtilisateur.telephone">Telephone</label>
+          <input type="text" class="form-control" name="telephone" id="field_telephone" data-cy="telephone" formControlName="telephone" />
+          @if (editForm.get('telephone')!.invalid && (editForm.get('telephone')!.dirty || editForm.get('telephone')!.touched)) {
+            <div>
+              @if (editForm.get('telephone')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_addresse" jhiTranslate="proxyApp.userManagementUtilisateur.addresse">Addresse</label>
+          <input type="text" class="form-control" name="addresse" id="field_addresse" data-cy="addresse" formControlName="addresse" />
+          @if (editForm.get('addresse')!.invalid && (editForm.get('addresse')!.dirty || editForm.get('addresse')!.touched)) {
+            <div>
+              @if (editForm.get('addresse')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ville" jhiTranslate="proxyApp.userManagementUtilisateur.ville">Ville</label>
+          <input type="text" class="form-control" name="ville" id="field_ville" data-cy="ville" formControlName="ville" />
+          @if (editForm.get('ville')!.invalid && (editForm.get('ville')!.dirty || editForm.get('ville')!.touched)) {
+            <div>
+              @if (editForm.get('ville')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pays" jhiTranslate="proxyApp.userManagementUtilisateur.pays">Pays</label>
+          <input type="text" class="form-control" name="pays" id="field_pays" data-cy="pays" formControlName="pays" />
+          @if (editForm.get('pays')!.invalid && (editForm.get('pays')!.dirty || editForm.get('pays')!.touched)) {
+            <div>
+              @if (editForm.get('pays')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_role" jhiTranslate="proxyApp.userManagementUtilisateur.role">Role</label>
+          <select class="form-control" name="role" formControlName="role" id="field_role" data-cy="role">
+            <option [ngValue]="null">{{ 'proxyApp.Role.null' | translate }}</option>
+            @for (role of roleValues; track $index) {
+              <option [value]="role">{{ 'proxyApp.Role.' + role | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('role')!.invalid && (editForm.get('role')!.dirty || editForm.get('role')!.touched)) {
+            <div>
+              @if (editForm.get('role')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_signature" jhiTranslate="proxyApp.userManagementUtilisateur.signature">Signature</label>
+          <div>
+            @if (editForm.get('signature')!.value) {
+              <div class="form-text text-danger clearfix">
+                <a
+                  class="pull-start"
+                  (click)="openFile(editForm.get('signature')!.value!, editForm.get('signatureContentType')!.value!)"
+                  jhiTranslate="entity.action.open"
+                  >Open</a
+                ><br />
+                <span class="pull-start"
+                  >{{ editForm.get('signatureContentType')!.value }}, {{ byteSize(editForm.get('signature')!.value!) }}</span
+                >
+                <button
+                  type="button"
+                  (click)="editForm.patchValue({ signature: undefined, signatureContentType: undefined })"
+                  class="btn btn-secondary btn-xs pull-end"
+                >
+                  <fa-icon icon="times"></fa-icon>
+                </button>
+              </div>
+            }
+            <input
+              type="file"
+              id="file_signature"
+              data-cy="signature"
+              (change)="setFileData($event, 'signature', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="signature" id="field_signature" data-cy="signature" formControlName="signature" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="signatureContentType"
+            id="field_signatureContentType"
+            formControlName="signatureContentType"
+          />
+          @if (editForm.get('signature')!.invalid && (editForm.get('signature')!.dirty || editForm.get('signature')!.touched)) {
+            <div>
+              @if (editForm.get('signature')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_authentification" jhiTranslate="proxyApp.userManagementUtilisateur.authentification"
+            >Authentification</label
+          >
+          <select
+            class="form-control"
+            id="field_authentification"
+            data-cy="authentification"
+            name="authentification"
+            formControlName="authentification"
+            [compareWith]="compareAuthentification"
+          >
+            <option [ngValue]="null"></option>
+            @for (authentificationOption of authentificationsCollection; track $index) {
+              <option [ngValue]="authentificationOption">{{ authentificationOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

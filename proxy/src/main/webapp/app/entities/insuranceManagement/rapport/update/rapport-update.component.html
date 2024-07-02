@@ -1,0 +1,144 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-rapport-heading"
+        data-cy="RapportCreateUpdateHeading"
+        jhiTranslate="proxyApp.insuranceManagementRapport.home.createOrEditLabel"
+      >
+        Create or edit a Rapport
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="proxyApp.insuranceManagementRapport.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_titre" jhiTranslate="proxyApp.insuranceManagementRapport.titre">Titre</label>
+          <input type="text" class="form-control" name="titre" id="field_titre" data-cy="titre" formControlName="titre" />
+          @if (editForm.get('titre')!.invalid && (editForm.get('titre')!.dirty || editForm.get('titre')!.touched)) {
+            <div>
+              @if (editForm.get('titre')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="proxyApp.insuranceManagementRapport.description"
+            >Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_type" jhiTranslate="proxyApp.insuranceManagementRapport.type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null">{{ 'proxyApp.RapportType.null' | translate }}</option>
+            @for (rapportType of rapportTypeValues; track $index) {
+              <option [value]="rapportType">{{ 'proxyApp.RapportType.' + rapportType | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)) {
+            <div>
+              @if (editForm.get('type')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateGeneration" jhiTranslate="proxyApp.insuranceManagementRapport.dateGeneration"
+            >Date Generation</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateGeneration"
+              data-cy="dateGeneration"
+              type="datetime-local"
+              class="form-control"
+              name="dateGeneration"
+              formControlName="dateGeneration"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('dateGeneration')!.invalid && (editForm.get('dateGeneration')!.dirty || editForm.get('dateGeneration')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('dateGeneration')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateGeneration')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_url" jhiTranslate="proxyApp.insuranceManagementRapport.url">Url</label>
+          <input type="text" class="form-control" name="url" id="field_url" data-cy="url" formControlName="url" />
+          @if (editForm.get('url')!.invalid && (editForm.get('url')!.dirty || editForm.get('url')!.touched)) {
+            <div>
+              @if (editForm.get('url')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_assurance" jhiTranslate="proxyApp.insuranceManagementRapport.assurance">Assurance</label>
+          <select
+            class="form-control"
+            id="field_assurance"
+            data-cy="assurance"
+            name="assurance"
+            formControlName="assurance"
+            [compareWith]="compareAssurance"
+          >
+            <option [ngValue]="null"></option>
+            @for (assuranceOption of assurancesSharedCollection; track $index) {
+              <option [ngValue]="assuranceOption">{{ assuranceOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

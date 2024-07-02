@@ -1,0 +1,48 @@
+{
+  "annotations": {
+    "changelogDate": "20240702124537"
+  },
+  "applications": ["proxy", "claims"],
+  "clientRootFolder": "claimManagement",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "FinanceurType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ASSUREUR,MUTUELLE,ORGANISME_PUBLIC"
+    },
+    {
+      "fieldName": "adresse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "telephone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "servicesFournis",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "claimManagement",
+  "name": "FinanceurSoin",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

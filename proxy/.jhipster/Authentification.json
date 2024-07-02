@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20240702123337"
+  },
+  "applications": ["proxy", "users"],
+  "clientRootFolder": "userManagement",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "dateConnexion",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "ipAdresse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "userManagement",
+  "name": "Authentification",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

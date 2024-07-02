@@ -1,0 +1,23 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 2,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "insurances",
+    "entities": [],
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "YzllZDczZjQ3ZTZiMDNiMmQwMDNhNTcyNDk3NzAzNjg4MWQwNWViMmQzNTkxOTM5NjI1ZTk1MDBlNzgzNDk3Y2U4YTM5OTJlOGYwNDlmYTNkNTZiOTY5ZjJhY2Q1NjJjMTgzMzEwMDM2MTA3ZTQ4YWQwNzdjYTkxNGY2NTg4ZDY=",
+    "languages": ["en"],
+    "messageBroker": "kafka",
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/teleo/insurances",
+    "packageName": "com.teleo.insurances",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "9002",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true
+  }
+}

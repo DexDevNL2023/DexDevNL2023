@@ -1,0 +1,109 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (utilisateur()) {
+      <div>
+        <h2 data-cy="utilisateurDetailsHeading"><span jhiTranslate="proxyApp.userManagementUtilisateur.detail.title">Utilisateur</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.numNiu">Num Niu</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.numNiu }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.nom">Nom</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.prenom">Prenom</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.prenom }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.email">Email</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.motDePasse">Mot De Passe</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.motDePasse }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.dateNaissance">Date Naissance</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.dateNaissance | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.numCni">Num Cni</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.numCni }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.sexe">Sexe</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.Gender.' + (utilisateur()!.sexe ?? 'null')">{{
+              { null: '', MALE: 'MALE', FEMALE: 'FEMALE', OTHER: 'OTHER' }[utilisateur()!.sexe ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.telephone">Telephone</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.telephone }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.addresse">Addresse</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.addresse }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.ville">Ville</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.ville }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.pays">Pays</span></dt>
+          <dd>
+            <span>{{ utilisateur()!.pays }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.role">Role</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.Role.' + (utilisateur()!.role ?? 'null')">{{
+              { null: '', CLIENT: 'CLIENT', AGENT: 'AGENT', ADMINISTRATEUR: 'ADMINISTRATEUR', FOURNISSEUR: 'FOURNISSEUR' }[
+                utilisateur()!.role ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.signature">Signature</span></dt>
+          <dd>
+            @if (utilisateur()!.signature) {
+              <div>
+                <a (click)="openFile(utilisateur()!.signature ?? '', utilisateur()!.signatureContentType)" jhiTranslate="entity.action.open"
+                  >Open</a
+                >
+                {{ utilisateur()!.signatureContentType }}, {{ byteSize(utilisateur()!.signature ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="proxyApp.userManagementUtilisateur.authentification">Authentification</span></dt>
+          <dd>
+            @if (utilisateur()!.authentification) {
+              <div>
+                <a [routerLink]="['/authentification', utilisateur()!.authentification?.id, 'view']">{{
+                  utilisateur()!.authentification?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/utilisateur', utilisateur()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

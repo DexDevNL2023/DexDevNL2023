@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (souscription()) {
+      <div>
+        <h2 data-cy="souscriptionDetailsHeading">
+          <span jhiTranslate="proxyApp.insuranceManagementSouscription.detail.title">Souscription</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ souscription()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementSouscription.numeroSouscription">Numero Souscription</span></dt>
+          <dd>
+            <span>{{ souscription()!.numeroSouscription }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementSouscription.dateSouscription">Date Souscription</span></dt>
+          <dd>
+            <span>{{ souscription()!.dateSouscription | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementSouscription.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.SubscriptionStatus.' + (souscription()!.status ?? 'null')">{{
+              { null: '', ACTIVE: 'ACTIVE', ON_RISK: 'ON_RISK', WATTING: 'WATTING', RESILIE: 'RESILIE' }[souscription()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementSouscription.cumulSinistres">Cumul Sinistres</span></dt>
+          <dd>
+            <span>{{ souscription()!.cumulSinistres }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementSouscription.frequencePaiement">Frequence Paiement</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.PaymentFrequency.' + (souscription()!.frequencePaiement ?? 'null')">{{
+              { null: '', MENSUEL: 'MENSUEL', TRIMESTRIEL: 'TRIMESTRIEL', SEMESTRIEL: 'SEMESTRIEL', ANNUEL: 'ANNUEL' }[
+                souscription()!.frequencePaiement ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementSouscription.utilisateurId">Utilisateur Id</span></dt>
+          <dd>
+            <span>{{ souscription()!.utilisateurId }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insuranceManagementSouscription.policesAssurances">Polices Assurances</span></dt>
+          <dd>
+            @if (souscription()!.policesAssurances) {
+              <div>
+                <a [routerLink]="['/polices-assurances', souscription()!.policesAssurances?.id, 'view']">{{
+                  souscription()!.policesAssurances?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/souscription', souscription()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

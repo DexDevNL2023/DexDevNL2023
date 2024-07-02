@@ -1,0 +1,56 @@
+{
+  "annotations": {
+    "changelogDate": "20240702123837"
+  },
+  "applications": ["proxy", "insurances"],
+  "clientRootFolder": "insuranceManagement",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "numeroSouscription",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "dateSouscription",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "SubscriptionStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,ON_RISK,WATTING,RESILIE"
+    },
+    {
+      "fieldName": "cumulSinistres",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "frequencePaiement",
+      "fieldType": "PaymentFrequency",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MENSUEL,TRIMESTRIEL,SEMESTRIEL,ANNUEL"
+    },
+    {
+      "fieldName": "utilisateurId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "insuranceManagement",
+  "name": "Souscription",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "policesAssurances",
+      "relationshipName": "policesAssurances",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

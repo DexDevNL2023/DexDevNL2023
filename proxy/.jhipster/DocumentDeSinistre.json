@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20240702124137"
+  },
+  "applications": ["proxy", "claims"],
+  "clientRootFolder": "claimManagement",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateTelechargement",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "claimManagement",
+  "name": "DocumentDeSinistre",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "sinistre",
+      "relationshipName": "sinistre",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

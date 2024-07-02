@@ -1,0 +1,3 @@
+org.springframework.test.context.ContextCustomizerFactory = com.teleo.proxy.\
+    config.SqlTestContainersSpringContextCustomizerFactory,com.teleo.proxy.\
+    config.KafkaTestContainersSpringContextCustomizerFactory
