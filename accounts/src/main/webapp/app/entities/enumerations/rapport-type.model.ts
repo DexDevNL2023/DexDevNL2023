@@ -1,0 +1,7 @@
+export enum RapportType {
+  PERFORMANCE = 'PERFORMANCE',
+
+  PAIEMENT = 'PAIEMENT',
+
+  SINISTRE = 'SINISTRE',
+}

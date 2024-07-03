@@ -1,0 +1,164 @@
+<div>
+  <h2 id="page-heading" data-cy="DocumentDeSinistreHeading">
+    <span jhiTranslate="accountsApp.claimsDocumentDeSinistre.home.title">Document De Sinistres</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="accountsApp.claimsDocumentDeSinistre.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-document-de-sinistre"
+        [routerLink]="['/document-de-sinistre/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="accountsApp.claimsDocumentDeSinistre.home.createLabel"
+          >Create a new Document De Sinistre</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="accountsApp.claimsDocumentDeSinistre.home.search"
+          >Search for Document De Sinistre</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'accountsApp.claimsDocumentDeSinistre.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (documentDeSinistres?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="accountsApp.claimsDocumentDeSinistre.home.notFound">No Document De Sinistres found</span>
+    </div>
+  }
+
+  @if (documentDeSinistres && documentDeSinistres.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsDocumentDeSinistre.nom">Nom</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsDocumentDeSinistre.type">Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="url">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsDocumentDeSinistre.url">Url</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateTelechargement">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsDocumentDeSinistre.dateTelechargement">Date Telechargement</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sinistre.id">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsDocumentDeSinistre.sinistre">Sinistre</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (documentDeSinistre of documentDeSinistres; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/document-de-sinistre', documentDeSinistre.id, 'view']">{{ documentDeSinistre.id }}</a>
+              </td>
+              <td>{{ documentDeSinistre.nom }}</td>
+              <td>{{ documentDeSinistre.type }}</td>
+              <td>{{ documentDeSinistre.url }}</td>
+              <td>{{ documentDeSinistre.dateTelechargement | formatMediumDatetime }}</td>
+              <td>
+                @if (documentDeSinistre.sinistre) {
+                  <div>
+                    <a [routerLink]="['/sinistre', documentDeSinistre.sinistre.id, 'view']">{{ documentDeSinistre.sinistre.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/document-de-sinistre', documentDeSinistre.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/document-de-sinistre', documentDeSinistre.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(documentDeSinistre)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

@@ -1,0 +1,10 @@
+{
+  "accountsApp": {
+    "RapportType": {
+      "null": "",
+      "PERFORMANCE": "PERFORMANCE",
+      "PAIEMENT": "PAIEMENT",
+      "SINISTRE": "SINISTRE"
+    }
+  }
+}

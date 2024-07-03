@@ -1,0 +1,107 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (userExtra()) {
+      <div>
+        <h2 data-cy="userExtraDetailsHeading"><span jhiTranslate="accountsApp.userExtra.detail.title">User Extra</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ userExtra()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.numNiu">Num Niu</span></dt>
+          <dd>
+            <span>{{ userExtra()!.numNiu }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.nom">Nom</span></dt>
+          <dd>
+            <span>{{ userExtra()!.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.prenom">Prenom</span></dt>
+          <dd>
+            <span>{{ userExtra()!.prenom }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.email">Email</span></dt>
+          <dd>
+            <span>{{ userExtra()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.motDePasse">Mot De Passe</span></dt>
+          <dd>
+            <span>{{ userExtra()!.motDePasse }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.dateNaissance">Date Naissance</span></dt>
+          <dd>
+            <span>{{ userExtra()!.dateNaissance | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.numCni">Num Cni</span></dt>
+          <dd>
+            <span>{{ userExtra()!.numCni }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.sexe">Sexe</span></dt>
+          <dd>
+            <span [jhiTranslate]="'accountsApp.Gender.' + (userExtra()!.sexe ?? 'null')">{{
+              { null: '', MALE: 'MALE', FEMALE: 'FEMALE', OTHER: 'OTHER' }[userExtra()!.sexe ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.telephone">Telephone</span></dt>
+          <dd>
+            <span>{{ userExtra()!.telephone }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.addresse">Addresse</span></dt>
+          <dd>
+            <span>{{ userExtra()!.addresse }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.ville">Ville</span></dt>
+          <dd>
+            <span>{{ userExtra()!.ville }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.pays">Pays</span></dt>
+          <dd>
+            <span>{{ userExtra()!.pays }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'accountsApp.UserExtraType.' + (userExtra()!.type ?? 'null')">{{
+              { null: '', CLIENT: 'CLIENT', AGENT: 'AGENT', ADMINISTRATEUR: 'ADMINISTRATEUR', FOURNISSEUR: 'FOURNISSEUR' }[
+                userExtra()!.type ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.signature">Signature</span></dt>
+          <dd>
+            @if (userExtra()!.signature) {
+              <div>
+                <a (click)="openFile(userExtra()!.signature ?? '', userExtra()!.signatureContentType)">
+                  <img
+                    [src]="'data:' + userExtra()!.signatureContentType + ';base64,' + userExtra()!.signature"
+                    style="max-width: 100%"
+                    alt="userExtra"
+                  />
+                </a>
+                {{ userExtra()!.signatureContentType }}, {{ byteSize(userExtra()!.signature ?? '') }}
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="accountsApp.userExtra.internalUser">Internal User</span></dt>
+          <dd>
+            <span>{{ userExtra()!.internalUser?.login }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/user-extra', userExtra()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,157 @@
+<div>
+  <h2 id="page-heading" data-cy="PaiementHeading">
+    <span jhiTranslate="accountsApp.insurancesPaiement.home.title">Paiements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="accountsApp.insurancesPaiement.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-paiement"
+        [routerLink]="['/paiement/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="accountsApp.insurancesPaiement.home.createLabel">Create a new Paiement</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="accountsApp.insurancesPaiement.home.search"
+          >Search for Paiement</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'accountsApp.insurancesPaiement.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (paiements?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="accountsApp.insurancesPaiement.home.notFound">No Paiements found</span>
+    </div>
+  }
+
+  @if (paiements && paiements.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="datePaiement">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.insurancesPaiement.datePaiement">Date Paiement</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="montant">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.insurancesPaiement.montant">Montant</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.insurancesPaiement.type">Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.insurancesPaiement.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="souscription.id">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.insurancesPaiement.souscription">Souscription</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (paiement of paiements; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/paiement', paiement.id, 'view']">{{ paiement.id }}</a>
+              </td>
+              <td>{{ paiement.datePaiement | formatMediumDatetime }}</td>
+              <td>{{ paiement.montant }}</td>
+              <td [jhiTranslate]="'accountsApp.PaymentType.' + (paiement.type ?? 'null')">
+                {{ { null: '', PRIME: 'PRIME', REMBOURSEMENT: 'REMBOURSEMENT' }[paiement.type ?? 'null'] }}
+              </td>
+              <td [jhiTranslate]="'accountsApp.PaymentStatus.' + (paiement.status ?? 'null')">
+                {{ { null: '', PENDING: 'PENDING', COMPLETED: 'COMPLETED', FAILED: 'FAILED' }[paiement.status ?? 'null'] }}
+              </td>
+              <td>
+                @if (paiement.souscription) {
+                  <div>
+                    <a [routerLink]="['/souscription', paiement.souscription.id, 'view']">{{ paiement.souscription.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/paiement', paiement.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/paiement', paiement.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(paiement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

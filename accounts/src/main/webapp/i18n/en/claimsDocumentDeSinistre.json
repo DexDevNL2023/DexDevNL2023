@@ -1,0 +1,33 @@
+{
+  "accountsApp": {
+    "claimsDocumentDeSinistre": {
+      "home": {
+        "title": "Document De Sinistres",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Document De Sinistre",
+        "createOrEditLabel": "Create or edit a Document De Sinistre",
+        "search": "Search for Document De Sinistre",
+        "notFound": "No Document De Sinistres found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Document De Sinistre {{ id }}?"
+      },
+      "detail": {
+        "title": "Document De Sinistre"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "type": "Type",
+      "url": "Url",
+      "dateTelechargement": "Date Telechargement",
+      "sinistre": "Sinistre"
+    }
+  },
+  "claimsApp": {
+    "claimsDocumentDeSinistre": {
+      "created": "A new Document De Sinistre is created with identifier {{ param }}",
+      "updated": "A Document De Sinistre is updated with identifier {{ param }}",
+      "deleted": "A Document De Sinistre is deleted with identifier {{ param }}"
+    }
+  }
+}
