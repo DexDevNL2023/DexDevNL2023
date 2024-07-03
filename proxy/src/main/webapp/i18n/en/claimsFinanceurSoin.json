@@ -1,0 +1,35 @@
+{
+  "proxyApp": {
+    "claimsFinanceurSoin": {
+      "home": {
+        "title": "Financeur Soins",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Financeur Soin",
+        "createOrEditLabel": "Create or edit a Financeur Soin",
+        "search": "Search for Financeur Soin",
+        "notFound": "No Financeur Soins found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Financeur Soin {{ id }}?"
+      },
+      "detail": {
+        "title": "Financeur Soin"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "type": "Type",
+      "adresse": "Adresse",
+      "telephone": "Telephone",
+      "email": "Email",
+      "servicesFournis": "Services Fournis",
+      "prestationSoin": "Prestation Soin"
+    }
+  },
+  "claimsApp": {
+    "claimsFinanceurSoin": {
+      "created": "A new Financeur Soin is created with identifier {{ param }}",
+      "updated": "A Financeur Soin is updated with identifier {{ param }}",
+      "deleted": "A Financeur Soin is deleted with identifier {{ param }}"
+    }
+  }
+}

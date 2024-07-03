@@ -1,0 +1,35 @@
+{
+  "proxyApp": {
+    "insurancesPolicesAssurances": {
+      "home": {
+        "title": "Polices Assurances",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Polices Assurances",
+        "createOrEditLabel": "Create or edit a Polices Assurances",
+        "search": "Search for Polices Assurances",
+        "notFound": "No Polices Assurances found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Polices Assurances {{ id }}?"
+      },
+      "detail": {
+        "title": "Polices Assurances"
+      },
+      "id": "ID",
+      "numeroPolice": "Numero Police",
+      "dateEmission": "Date Emission",
+      "dateExpiration": "Date Expiration",
+      "description": "Description",
+      "montantAssure": "Montant Assure",
+      "plafondAssure": "Plafond Assure",
+      "assurance": "Assurance"
+    }
+  },
+  "insurancesApp": {
+    "insurancesPolicesAssurances": {
+      "created": "A new Polices Assurances is created with identifier {{ param }}",
+      "updated": "A Polices Assurances is updated with identifier {{ param }}",
+      "deleted": "A Polices Assurances is deleted with identifier {{ param }}"
+    }
+  }
+}

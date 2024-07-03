@@ -1,0 +1,32 @@
+{
+  "proxyApp": {
+    "accountsMedicalRecord": {
+      "home": {
+        "title": "Medical Records",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Medical Record",
+        "createOrEditLabel": "Create or edit a Medical Record",
+        "search": "Search for Medical Record",
+        "notFound": "No Medical Records found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Medical Record {{ id }}?"
+      },
+      "detail": {
+        "title": "Medical Record"
+      },
+      "id": "ID",
+      "numMedicalRecord": "Num Medical Record",
+      "details": "Details",
+      "dateUpdated": "Date Updated",
+      "utilisateur": "Utilisateur"
+    }
+  },
+  "accountsApp": {
+    "accountsMedicalRecord": {
+      "created": "A new Medical Record is created with identifier {{ param }}",
+      "updated": "A Medical Record is updated with identifier {{ param }}",
+      "deleted": "A Medical Record is deleted with identifier {{ param }}"
+    }
+  }
+}

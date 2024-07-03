@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Assurance.
+    -->
+    <changeSet id="20240703085106-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="assurance_id"
+                                 baseTableName="rel_assurance__garantie"
+                                 constraintName="fk_rel_assurance__garantie__assurance_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="assurance"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="garantie_id"
+                                 baseTableName="rel_assurance__garantie"
+                                 constraintName="fk_rel_assurance__garantie__garantie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="garantie"
+                                 />
+    </changeSet>
+</databaseChangeLog>

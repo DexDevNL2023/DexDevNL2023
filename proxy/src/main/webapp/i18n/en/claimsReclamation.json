@@ -1,0 +1,33 @@
+{
+  "proxyApp": {
+    "claimsReclamation": {
+      "home": {
+        "title": "Reclamations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Reclamation",
+        "createOrEditLabel": "Create or edit a Reclamation",
+        "search": "Search for Reclamation",
+        "notFound": "No Reclamations found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Reclamation {{ id }}?"
+      },
+      "detail": {
+        "title": "Reclamation"
+      },
+      "id": "ID",
+      "numeroReclamation": "Numero Reclamation",
+      "dateReclamation": "Date Reclamation",
+      "description": "Description",
+      "status": "Status",
+      "sinistre": "Sinistre"
+    }
+  },
+  "claimsApp": {
+    "claimsReclamation": {
+      "created": "A new Reclamation is created with identifier {{ param }}",
+      "updated": "A Reclamation is updated with identifier {{ param }}",
+      "deleted": "A Reclamation is deleted with identifier {{ param }}"
+    }
+  }
+}

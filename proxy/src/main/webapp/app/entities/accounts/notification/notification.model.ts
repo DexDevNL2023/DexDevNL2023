@@ -1,0 +1,13 @@
+import dayjs from 'dayjs/esm';
+import { IUserExtra } from 'app/entities/accounts/user-extra/user-extra.model';
+import { NotificationType } from 'app/entities/enumerations/notification-type.model';
+
+export interface INotification {
+  id: number;
+  message?: string | null;
+  dateEnvoi?: dayjs.Dayjs | null;
+  type?: keyof typeof NotificationType | null;
+  utilisateur?: Pick<IUserExtra, 'id'> | null;
+}
+
+export type NewNotification = Omit<INotification, 'id'> & { id: null };
