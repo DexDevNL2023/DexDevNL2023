@@ -1,0 +1,218 @@
+<div>
+  <h2 id="page-heading" data-cy="UserExtraHeading">
+    <span jhiTranslate="accountsApp.userExtra.home.title">User Extras</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="accountsApp.userExtra.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-user-extra"
+        [routerLink]="['/user-extra/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="accountsApp.userExtra.home.createLabel">Create a new User Extra</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (userExtras?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="accountsApp.userExtra.home.notFound">No User Extras found</span>
+    </div>
+  }
+
+  @if (userExtras && userExtras.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="numNiu">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.numNiu">Num Niu</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.nom">Nom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prenom">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.prenom">Prenom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="email">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="motDePasse">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.motDePasse">Mot De Passe</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateNaissance">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.dateNaissance">Date Naissance</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="numCni">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.numCni">Num Cni</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="sexe">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.sexe">Sexe</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="telephone">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.telephone">Telephone</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="addresse">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.addresse">Addresse</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="ville">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.ville">Ville</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pays">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.pays">Pays</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.type">Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="signature">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.signature">Signature</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="internalUser.login">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.userExtra.internalUser">Internal User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (userExtra of userExtras; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/user-extra', userExtra.id, 'view']">{{ userExtra.id }}</a>
+              </td>
+              <td>{{ userExtra.numNiu }}</td>
+              <td>{{ userExtra.nom }}</td>
+              <td>{{ userExtra.prenom }}</td>
+              <td>{{ userExtra.email }}</td>
+              <td>{{ userExtra.motDePasse }}</td>
+              <td>{{ userExtra.dateNaissance | formatMediumDatetime }}</td>
+              <td>{{ userExtra.numCni }}</td>
+              <td [jhiTranslate]="'accountsApp.Gender.' + (userExtra.sexe ?? 'null')">
+                {{ { null: '', MALE: 'MALE', FEMALE: 'FEMALE', OTHER: 'OTHER' }[userExtra.sexe ?? 'null'] }}
+              </td>
+              <td>{{ userExtra.telephone }}</td>
+              <td>{{ userExtra.addresse }}</td>
+              <td>{{ userExtra.ville }}</td>
+              <td>{{ userExtra.pays }}</td>
+              <td [jhiTranslate]="'accountsApp.UserExtraType.' + (userExtra.type ?? 'null')">
+                {{
+                  { null: '', CLIENT: 'CLIENT', AGENT: 'AGENT', ADMINISTRATEUR: 'ADMINISTRATEUR', FOURNISSEUR: 'FOURNISSEUR' }[
+                    userExtra.type ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>
+                @if (userExtra.signature) {
+                  <a (click)="openFile(userExtra.signature, userExtra.signatureContentType)">
+                    <img
+                      [src]="'data:' + userExtra.signatureContentType + ';base64,' + userExtra.signature"
+                      style="max-height: 30px"
+                      alt="userExtra"
+                    />
+                  </a>
+                  <span>{{ userExtra.signatureContentType }}, {{ byteSize(userExtra.signature) }}</span>
+                }
+              </td>
+              <td>
+                {{ userExtra.internalUser?.login }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/user-extra', userExtra.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/user-extra', userExtra.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(userExtra)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

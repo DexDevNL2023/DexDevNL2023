@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (prestationSoin()) {
+      <div>
+        <h2 data-cy="prestationSoinDetailsHeading">
+          <span jhiTranslate="accountsApp.claimsPrestationSoin.detail.title">Prestation Soin</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ prestationSoin()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsPrestationSoin.nom">Nom</span></dt>
+          <dd>
+            <span>{{ prestationSoin()!.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsPrestationSoin.description">Description</span></dt>
+          <dd>
+            <span>{{ prestationSoin()!.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsPrestationSoin.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'accountsApp.PrestationType.' + (prestationSoin()!.type ?? 'null')">{{
+              {
+                null: '',
+                CONSULTATION: 'CONSULTATION',
+                HOSPITALISATION: 'HOSPITALISATION',
+                SOINS_PARAMEDICAUX: 'SOINS_PARAMEDICAUX',
+                RADIOLOGIE: 'RADIOLOGIE',
+                ANALYSES_LABORATOIRE: 'ANALYSES_LABORATOIRE',
+                PHARMACIE: 'PHARMACIE',
+                CHIRURGIE: 'CHIRURGIE',
+                URGENCES: 'URGENCES',
+                SOINS_DENTAIRES: 'SOINS_DENTAIRES',
+                SOINS_OCULAIRES: 'SOINS_OCULAIRES',
+                MATERNITE: 'MATERNITE',
+                REEDUCATION: 'REEDUCATION',
+                PSYCHOTHERAPIE: 'PSYCHOTHERAPIE',
+                SOINS_A_DOMICILE: 'SOINS_A_DOMICILE',
+                AMBULANCE: 'AMBULANCE',
+                VACCINATION: 'VACCINATION',
+                TELEMEDECINE: 'TELEMEDECINE',
+                NUTRITION: 'NUTRITION',
+                PHYSIOTHERAPIE: 'PHYSIOTHERAPIE',
+              }[prestationSoin()!.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsPrestationSoin.montant">Montant</span></dt>
+          <dd>
+            <span>{{ prestationSoin()!.montant }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsPrestationSoin.financeurSoin">Financeur Soin</span></dt>
+          <dd>
+            @if (prestationSoin()!.financeurSoin) {
+              <div>
+                <a [routerLink]="['/financeur-soin', prestationSoin()!.financeurSoin?.id, 'view']">{{
+                  prestationSoin()!.financeurSoin?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsPrestationSoin.financeurSoin">Financeur Soin</span></dt>
+          <dd>
+            @for (financeurSoin of prestationSoin()!.financeurSoins; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/financeur-soin', financeurSoin.id, 'view']">{{ financeurSoin?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/prestation-soin', prestationSoin()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
