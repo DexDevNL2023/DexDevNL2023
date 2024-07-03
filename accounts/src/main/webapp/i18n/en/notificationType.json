@@ -1,0 +1,10 @@
+{
+  "accountsApp": {
+    "NotificationType": {
+      "null": "",
+      "PAIEMENT": "PAIEMENT",
+      "RENOUVELLEMENT": "RENOUVELLEMENT",
+      "SINISTRE": "SINISTRE"
+    }
+  }
+}

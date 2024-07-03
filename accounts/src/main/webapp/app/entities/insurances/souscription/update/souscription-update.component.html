@@ -1,0 +1,217 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-souscription-heading"
+        data-cy="SouscriptionCreateUpdateHeading"
+        jhiTranslate="accountsApp.insurancesSouscription.home.createOrEditLabel"
+      >
+        Create or edit a Souscription
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="accountsApp.insurancesSouscription.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numeroSouscription" jhiTranslate="accountsApp.insurancesSouscription.numeroSouscription"
+            >Numero Souscription</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroSouscription"
+            id="field_numeroSouscription"
+            data-cy="numeroSouscription"
+            formControlName="numeroSouscription"
+          />
+          @if (
+            editForm.get('numeroSouscription')!.invalid &&
+            (editForm.get('numeroSouscription')!.dirty || editForm.get('numeroSouscription')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('numeroSouscription')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateSouscription" jhiTranslate="accountsApp.insurancesSouscription.dateSouscription"
+            >Date Souscription</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateSouscription"
+              data-cy="dateSouscription"
+              type="datetime-local"
+              class="form-control"
+              name="dateSouscription"
+              formControlName="dateSouscription"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('dateSouscription')!.invalid &&
+            (editForm.get('dateSouscription')!.dirty || editForm.get('dateSouscription')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('dateSouscription')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateSouscription')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="accountsApp.insurancesSouscription.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'accountsApp.SubscriptionStatus.null' | translate }}</option>
+            @for (subscriptionStatus of subscriptionStatusValues; track $index) {
+              <option [value]="subscriptionStatus">{{ 'accountsApp.SubscriptionStatus.' + subscriptionStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cumulSinistres" jhiTranslate="accountsApp.insurancesSouscription.cumulSinistres"
+            >Cumul Sinistres</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="cumulSinistres"
+            id="field_cumulSinistres"
+            data-cy="cumulSinistres"
+            formControlName="cumulSinistres"
+          />
+          @if (
+            editForm.get('cumulSinistres')!.invalid && (editForm.get('cumulSinistres')!.dirty || editForm.get('cumulSinistres')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('cumulSinistres')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('cumulSinistres')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_frequencePaiement" jhiTranslate="accountsApp.insurancesSouscription.frequencePaiement"
+            >Frequence Paiement</label
+          >
+          <select
+            class="form-control"
+            name="frequencePaiement"
+            formControlName="frequencePaiement"
+            id="field_frequencePaiement"
+            data-cy="frequencePaiement"
+          >
+            <option [ngValue]="null">{{ 'accountsApp.PaymentFrequency.null' | translate }}</option>
+            @for (paymentFrequency of paymentFrequencyValues; track $index) {
+              <option [value]="paymentFrequency">{{ 'accountsApp.PaymentFrequency.' + paymentFrequency | translate }}</option>
+            }
+          </select>
+          @if (
+            editForm.get('frequencePaiement')!.invalid &&
+            (editForm.get('frequencePaiement')!.dirty || editForm.get('frequencePaiement')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('frequencePaiement')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_utilisateurId" jhiTranslate="accountsApp.insurancesSouscription.utilisateurId"
+            >Utilisateur Id</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="utilisateurId"
+            id="field_utilisateurId"
+            data-cy="utilisateurId"
+            formControlName="utilisateurId"
+          />
+          @if (editForm.get('utilisateurId')!.invalid && (editForm.get('utilisateurId')!.dirty || editForm.get('utilisateurId')!.touched)) {
+            <div>
+              @if (editForm.get('utilisateurId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('utilisateurId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_policesAssurances" jhiTranslate="accountsApp.insurancesSouscription.policesAssurances"
+            >Polices Assurances</label
+          >
+          <select
+            class="form-control"
+            id="field_policesAssurances"
+            data-cy="policesAssurances"
+            name="policesAssurances"
+            formControlName="policesAssurances"
+            [compareWith]="comparePolicesAssurances"
+          >
+            <option [ngValue]="null"></option>
+            @for (policesAssurancesOption of policesAssurancesSharedCollection; track $index) {
+              <option [ngValue]="policesAssurancesOption">{{ policesAssurancesOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

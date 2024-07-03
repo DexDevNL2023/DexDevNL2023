@@ -1,0 +1,187 @@
+<div>
+  <h2 id="page-heading" data-cy="PrestationSoinHeading">
+    <span jhiTranslate="accountsApp.claimsPrestationSoin.home.title">Prestation Soins</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="accountsApp.claimsPrestationSoin.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-prestation-soin"
+        [routerLink]="['/prestation-soin/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="accountsApp.claimsPrestationSoin.home.createLabel">Create a new Prestation Soin</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="accountsApp.claimsPrestationSoin.home.search"
+          >Search for Prestation Soin</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'accountsApp.claimsPrestationSoin.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (prestationSoins?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="accountsApp.claimsPrestationSoin.home.notFound">No Prestation Soins found</span>
+    </div>
+  }
+
+  @if (prestationSoins && prestationSoins.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsPrestationSoin.nom">Nom</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsPrestationSoin.description">Description</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsPrestationSoin.type">Type</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="montant">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsPrestationSoin.montant">Montant</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="financeurSoin.id">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsPrestationSoin.financeurSoin">Financeur Soin</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (prestationSoin of prestationSoins; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/prestation-soin', prestationSoin.id, 'view']">{{ prestationSoin.id }}</a>
+              </td>
+              <td>{{ prestationSoin.nom }}</td>
+              <td>{{ prestationSoin.description }}</td>
+              <td [jhiTranslate]="'accountsApp.PrestationType.' + (prestationSoin.type ?? 'null')">
+                {{
+                  {
+                    null: '',
+                    CONSULTATION: 'CONSULTATION',
+                    HOSPITALISATION: 'HOSPITALISATION',
+                    SOINS_PARAMEDICAUX: 'SOINS_PARAMEDICAUX',
+                    RADIOLOGIE: 'RADIOLOGIE',
+                    ANALYSES_LABORATOIRE: 'ANALYSES_LABORATOIRE',
+                    PHARMACIE: 'PHARMACIE',
+                    CHIRURGIE: 'CHIRURGIE',
+                    URGENCES: 'URGENCES',
+                    SOINS_DENTAIRES: 'SOINS_DENTAIRES',
+                    SOINS_OCULAIRES: 'SOINS_OCULAIRES',
+                    MATERNITE: 'MATERNITE',
+                    REEDUCATION: 'REEDUCATION',
+                    PSYCHOTHERAPIE: 'PSYCHOTHERAPIE',
+                    SOINS_A_DOMICILE: 'SOINS_A_DOMICILE',
+                    AMBULANCE: 'AMBULANCE',
+                    VACCINATION: 'VACCINATION',
+                    TELEMEDECINE: 'TELEMEDECINE',
+                    NUTRITION: 'NUTRITION',
+                    PHYSIOTHERAPIE: 'PHYSIOTHERAPIE',
+                  }[prestationSoin.type ?? 'null']
+                }}
+              </td>
+              <td>{{ prestationSoin.montant }}</td>
+              <td>
+                @if (prestationSoin.financeurSoin) {
+                  <div>
+                    <a [routerLink]="['/financeur-soin', prestationSoin.financeurSoin.id, 'view']">{{ prestationSoin.financeurSoin.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/prestation-soin', prestationSoin.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/prestation-soin', prestationSoin.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(prestationSoin)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

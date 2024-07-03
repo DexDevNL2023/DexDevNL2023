@@ -1,0 +1,199 @@
+<div>
+  <h2 id="page-heading" data-cy="SinistreHeading">
+    <span jhiTranslate="accountsApp.claimsSinistre.home.title">Sinistres</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="accountsApp.claimsSinistre.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sinistre"
+        [routerLink]="['/sinistre/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span class="hidden-sm-down" jhiTranslate="accountsApp.claimsSinistre.home.createLabel">Create a new Sinistre</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <form name="searchForm" class="row row-cols-sm-auto align-items-center">
+    <div class="col-sm-12">
+      <div class="input-group w-100 mt-3">
+        <label class="visually-hidden" for="currentSearch" jhiTranslate="accountsApp.claimsSinistre.home.search">Search for Sinistre</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="currentSearch"
+          id="currentSearch"
+          name="currentSearch"
+          placeholder="{{ 'accountsApp.claimsSinistre.home.search' | translate }}"
+        />
+
+        <button class="btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+
+        @if (currentSearch) {
+          <button class="btn btn-danger" (click)="search('')">
+            <fa-icon icon="trash-alt"></fa-icon>
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+
+  @if (sinistres?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="accountsApp.claimsSinistre.home.notFound">No Sinistres found</span>
+    </div>
+  }
+
+  @if (sinistres && sinistres.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="numeroSinistre">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.numeroSinistre">Numero Sinistre</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateDeclaration">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.dateDeclaration">Date Declaration</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateTraitement">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.dateTraitement">Date Traitement</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="status">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.status">Status</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="raison">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.raison">Raison</span>
+                @if (!currentSearch) {
+                  <fa-icon class="p-1" icon="sort"></fa-icon>
+                }
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="montantReclame">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.montantReclame">Montant Reclame</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="montantApprouve">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.montantApprouve">Montant Approuve</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="souscriptionId">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.souscriptionId">Souscription Id</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="fournisseur.id">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.fournisseur">Fournisseur</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="prestationsSoin.id">
+              <div class="d-flex">
+                <span jhiTranslate="accountsApp.claimsSinistre.prestationsSoin">Prestations Soin</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (sinistre of sinistres; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/sinistre', sinistre.id, 'view']">{{ sinistre.id }}</a>
+              </td>
+              <td>{{ sinistre.numeroSinistre }}</td>
+              <td>{{ sinistre.dateDeclaration | formatMediumDatetime }}</td>
+              <td>{{ sinistre.dateTraitement | formatMediumDatetime }}</td>
+              <td [jhiTranslate]="'accountsApp.ClaimStatus.' + (sinistre.status ?? 'null')">
+                {{ { null: '', EN_ATTENTE: 'EN_ATTENTE', APPROUVE: 'APPROUVE', ANNULE: 'ANNULE' }[sinistre.status ?? 'null'] }}
+              </td>
+              <td>{{ sinistre.raison }}</td>
+              <td>{{ sinistre.montantReclame }}</td>
+              <td>{{ sinistre.montantApprouve }}</td>
+              <td>{{ sinistre.souscriptionId }}</td>
+              <td>
+                @if (sinistre.fournisseur) {
+                  <div>
+                    <a [routerLink]="['/fournisseur', sinistre.fournisseur.id, 'view']">{{ sinistre.fournisseur.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (sinistre.prestationsSoin) {
+                  <div>
+                    <a [routerLink]="['/prestation-soin', sinistre.prestationsSoin.id, 'view']">{{ sinistre.prestationsSoin.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/sinistre', sinistre.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/sinistre', sinistre.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(sinistre)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

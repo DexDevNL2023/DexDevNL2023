@@ -1,0 +1,36 @@
+{
+  "accountsApp": {
+    "insurancesAssurance": {
+      "home": {
+        "title": "Assurances",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Assurance",
+        "createOrEditLabel": "Create or edit a Assurance",
+        "search": "Search for Assurance",
+        "notFound": "No Assurances found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Assurance {{ id }}?"
+      },
+      "detail": {
+        "title": "Assurance"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "description": "Description",
+      "conditions": "Conditions",
+      "type": "Type",
+      "prixAssurance": "Prix Assurance",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "garantie": "Garantie"
+    }
+  },
+  "insurancesApp": {
+    "insurancesAssurance": {
+      "created": "A new Assurance is created with identifier {{ param }}",
+      "updated": "A Assurance is updated with identifier {{ param }}",
+      "deleted": "A Assurance is deleted with identifier {{ param }}"
+    }
+  }
+}
