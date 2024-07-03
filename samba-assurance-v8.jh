@@ -1,0 +1,350 @@
+/*
+ * This is a microservice sanba micro-assurance app with Gateway and three microservice applications
+ */
+
+
+/**
+ * Entities for gateway
+ */
+
+application {
+  config {
+    baseName proxy
+    applicationType gateway
+    packageName com.teleo
+    serviceDiscoveryType consul
+    serverPort 9000
+  }
+  entities *
+  paginate * with infinite-scroll
+  service * with serviceImpl
+  dto * with mapstruct
+  search * with elasticsearch
+  filter *
+}
+
+application {
+  config {
+    baseName accounts
+    applicationType microservice
+    packageName com.teleo.accounts
+    serviceDiscoveryType consul
+    prodDatabaseType postgresql
+    serverPort 9001
+  }
+  entities UserExtra, Notification, MedicalDocument, MedicalRecord
+  paginate UserExtra, MedicalDocument, Notification, MedicalRecord with infinite-scroll
+  service UserExtra, MedicalDocument, Notification, MedicalRecord with serviceImpl
+  dto UserExtra, MedicalDocument, Notification, MedicalRecord with mapstruct
+  search UserExtra, MedicalDocument, Notification, MedicalRecord with elasticsearch
+  filter UserExtra, MedicalDocument, Notification, MedicalRecord
+  microservice UserExtra, MedicalDocument, Notification, MedicalRecord with accounts  
+}
+
+application {
+  config {
+    baseName insurances
+    applicationType microservice
+    packageName com.teleo.insurances
+    serviceDiscoveryType consul
+    prodDatabaseType postgresql
+    serverPort 9002
+  }
+  entities Assurance, Garantie, Rapport, PolicesAssurances, Souscription, Paiement
+  paginate Assurance, Garantie, Rapport, PolicesAssurances, Souscription, Paiement with infinite-scroll
+  service Assurance, Garantie, Rapport, PolicesAssurances, Souscription, Paiement with serviceImpl
+  dto Assurance, Garantie, Rapport, PolicesAssurances, Souscription, Paiement with mapstruct
+  search Assurance, Garantie, Rapport, PolicesAssurances, Souscription, Paiement with elasticsearch
+  filter Assurance, Garantie, Rapport, PolicesAssurances, Souscription, Paiement
+  microservice Assurance, Garantie, Rapport, PolicesAssurances, Souscription, Paiement with insurances
+}
+
+application {
+  config {
+    baseName claims
+    applicationType microservice
+    packageName com.teleo.claims
+    serviceDiscoveryType consul
+    prodDatabaseType postgresql
+    serverPort 9003
+  }
+  entities Sinistre, DocumentDeSinistre, Reclamation, Fournisseur, PrestationSoin, FinanceurSoin
+  paginate Sinistre, DocumentDeSinistre, Reclamation, Fournisseur, PrestationSoin, FinanceurSoin with infinite-scroll
+  service Sinistre, DocumentDeSinistre, Reclamation, Fournisseur, PrestationSoin, FinanceurSoin with serviceImpl
+  dto Sinistre, DocumentDeSinistre, Reclamation, Fournisseur, PrestationSoin, FinanceurSoin with mapstruct
+  search Sinistre, DocumentDeSinistre, Reclamation, Fournisseur, PrestationSoin, FinanceurSoin with elasticsearch
+  filter Sinistre, DocumentDeSinistre, Reclamation, Fournisseur, PrestationSoin, FinanceurSoin
+  microservice Sinistre, DocumentDeSinistre, Reclamation, Fournisseur, PrestationSoin, FinanceurSoin with claims
+}
+
+/**
+ * Entities for user account management microservice
+ */
+
+entity UserExtra {
+  numNiu String required
+  nom String required
+  prenom String required
+  email String required unique pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+  motDePasse String required
+  dateNaissance Instant required
+  numCni String required
+  sexe Gender required
+  telephone String required
+  addresse String required
+  ville String required
+  pays String required
+  type UserExtraType required
+  signature ImageBlob required
+}
+enum UserExtraType {
+  CLIENT,
+  AGENT,
+  ADMINISTRATEUR,
+  FOURNISSEUR
+}
+enum Gender {
+    MALE,
+    FEMALE,
+    OTHER
+}
+
+entity MedicalRecord {
+  numMedicalRecord String required unique
+  details String required
+  dateUpdated Instant required
+}
+
+entity MedicalDocument {
+  nom String required
+  type String required
+  url String required
+}
+
+entity Notification {
+  message String required
+  dateEnvoi Instant required
+  type NotificationType required
+}
+enum NotificationType {
+  PAIEMENT,
+  RENOUVELLEMENT,
+  SINISTRE
+}
+
+relationship ManyToOne {
+  Notification{utilisateur} to UserExtra
+  MedicalRecord{utilisateur} to UserExtra
+  MedicalDocument{dossierMedical} to MedicalRecord
+}
+
+relationship OneToOne {
+  UserExtra{internalUser(login)} to @OnDelete("CASCADE") @Id User with builtInEntity
+}
+
+/**
+ * Entities for insurance management microservice
+ */
+
+entity Assurance {
+  nom String required
+  description String
+  conditions String
+  type InsuranceType required
+  prixAssurance BigDecimal required
+  dateDebut Instant required
+  dateFin Instant required
+}
+enum InsuranceType {
+  PERSONNE,
+  BIEN,
+  AGRICOLE
+}
+
+entity Garantie {
+  description String required
+  dateDebut Instant required
+  dateFin Instant required
+  status GarantieStatus required
+}
+enum GarantieStatus {
+  ACTIVE,
+  EXPIREE,
+  SUSPENDUE
+}
+
+entity Rapport {
+  titre String required
+  description String
+  type RapportType required
+  dateGeneration Instant required
+  url String required
+}
+enum RapportType {
+  PERFORMANCE,
+  PAIEMENT,
+  SINISTRE
+}
+
+entity PolicesAssurances {
+  numeroPolice String required unique
+  dateEmission Instant required
+  dateExpiration Instant required
+  description String
+  montantAssure BigDecimal required
+  plafondAssure BigDecimal required
+}
+
+entity Souscription {
+  numeroSouscription String required unique
+  dateSouscription Instant required
+  status SubscriptionStatus required
+  cumulSinistres BigDecimal required
+  frequencePaiement PaymentFrequency required
+  utilisateurId Long required
+}
+enum SubscriptionStatus {
+  ACTIVE,
+  ON_RISK,
+  WATTING,
+  RESILIE
+}
+enum PaymentFrequency {
+  MENSUEL,
+  TRIMESTRIEL,
+  SEMESTRIEL,
+  ANNUEL
+}
+
+entity Paiement {
+  datePaiement Instant required
+  montant BigDecimal required
+  type PaymentType required
+  status PaymentStatus required
+}
+enum PaymentType {
+  PRIME,
+  REMBOURSEMENT
+}
+enum PaymentStatus {
+  PENDING,
+  COMPLETED,
+  FAILED
+}
+
+relationship ManyToOne {
+  Rapport{assurance} to Assurance
+  PolicesAssurances{assurance} to Assurance
+  Souscription{policesAssurances} to PolicesAssurances
+  Paiement{souscription} to Souscription
+}
+
+relationship ManyToMany {
+  Assurance{garantie} to Garantie
+}
+
+/**
+ * Entities for claim management microservice
+ */
+
+entity Sinistre {
+  numeroSinistre String required unique
+  dateDeclaration Instant required
+  dateTraitement Instant
+  status ClaimStatus required
+  raison String required
+  montantReclame BigDecimal required
+  montantApprouve BigDecimal
+  souscriptionId Long required
+}
+enum ClaimStatus {
+  EN_ATTENTE,
+  APPROUVE,
+  ANNULE
+}
+
+entity DocumentDeSinistre {
+  nom String required
+  type String required
+  url String required
+  dateTelechargement Instant required
+}
+
+entity Reclamation {
+  numeroReclamation String required unique
+  dateReclamation Instant required
+  description String required
+  status ReclamationStatus required
+}
+enum ReclamationStatus {
+  EN_COURS,
+  RESOLUE,
+  REJETEE
+}
+
+entity Fournisseur {
+  nom String required
+  adresse String required
+  telephone String required
+  email String required
+  addresse String required
+  ville String required
+  pays String required
+  servicesFournis String required
+  dateDebutContrat Instant required
+  dateFinContrat Instant
+}
+
+entity PrestationSoin {
+  nom String required
+  description String
+  type PrestationType required
+  montant BigDecimal required
+}
+enum PrestationType {
+  CONSULTATION,
+  HOSPITALISATION,
+  SOINS_PARAMEDICAUX,
+  RADIOLOGIE,
+  ANALYSES_LABORATOIRE,
+  PHARMACIE,
+  CHIRURGIE,
+  URGENCES,
+  SOINS_DENTAIRES,
+  SOINS_OCULAIRES,
+  MATERNITE,
+  REEDUCATION,
+  PSYCHOTHERAPIE,
+  SOINS_A_DOMICILE,
+  AMBULANCE,
+  VACCINATION,
+  TELEMEDECINE,
+  NUTRITION,
+  PHYSIOTHERAPIE
+}
+
+entity FinanceurSoin {
+  nom String required
+  type FinanceurType required
+  adresse String required
+  telephone String required
+  email String required
+  servicesFournis String required
+}
+enum FinanceurType {
+  ASSUREUR,
+  MUTUELLE,
+  ORGANISME_PUBLIC
+}
+
+relationship ManyToMany {
+  PrestationSoin{financeurSoin} to FinanceurSoin
+}
+
+relationship ManyToOne {
+  Sinistre{fournisseur} to Fournisseur
+  DocumentDeSinistre{sinistre} to Sinistre
+  Reclamation{sinistre} to Sinistre
+  PrestationSoin{financeurSoin} to FinanceurSoin
+  Sinistre{prestationsSoin} to PrestationSoin
+}

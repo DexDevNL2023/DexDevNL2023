@@ -1,0 +1,10 @@
+{
+  "proxyApp": {
+    "InsuranceType": {
+      "null": "",
+      "PERSONNE": "PERSONNE",
+      "BIEN": "BIEN",
+      "AGRICOLE": "AGRICOLE"
+    }
+  }
+}

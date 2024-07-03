@@ -1,0 +1,11 @@
+{
+  "proxyApp": {
+    "PaymentFrequency": {
+      "null": "",
+      "MENSUEL": "MENSUEL",
+      "TRIMESTRIEL": "TRIMESTRIEL",
+      "SEMESTRIEL": "SEMESTRIEL",
+      "ANNUEL": "ANNUEL"
+    }
+  }
+}
