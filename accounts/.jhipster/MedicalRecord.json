@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20240703074208"
+  },
+  "applications": ["accounts"],
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "numMedicalRecord",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateUpdated",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "MedicalRecord",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "userExtra",
+      "relationshipName": "utilisateur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

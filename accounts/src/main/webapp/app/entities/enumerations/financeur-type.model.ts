@@ -1,0 +1,7 @@
+export enum FinanceurType {
+  ASSUREUR = 'ASSUREUR',
+
+  MUTUELLE = 'MUTUELLE',
+
+  ORGANISME_PUBLIC = 'ORGANISME_PUBLIC',
+}
