@@ -1,0 +1,7 @@
+export enum NotificationType {
+  PAIEMENT = 'PAIEMENT',
+
+  RENOUVELLEMENT = 'RENOUVELLEMENT',
+
+  SINISTRE = 'SINISTRE',
+}
