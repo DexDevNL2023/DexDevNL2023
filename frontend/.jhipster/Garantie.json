@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20240703061310"
+  },
+  "applications": ["frontend", "insurances"],
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "GarantieStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,EXPIREE,SUSPENDUE"
+    }
+  ],
+  "name": "Garantie",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

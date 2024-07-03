@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20240703061910"
+  },
+  "applications": ["frontend", "claims"],
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateTelechargement",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "DocumentDeSinistre",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "sinistre",
+      "relationshipName": "sinistre",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

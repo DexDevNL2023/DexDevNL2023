@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20240703061010"
+  },
+  "applications": ["frontend", "accounts"],
+  "clientRootFolder": "accounts",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "microserviceName": "accounts",
+  "name": "MedicalDocument",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "medicalRecord",
+      "relationshipName": "dossierMedical",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity PrestationSoin.
+    -->
+    <changeSet id="20240703062210-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="financeur_soin_id"
+                                 baseTableName="prestation_soin"
+                                 constraintName="fk_prestation_soin__financeur_soin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="financeur_soin"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="prestation_soin_id"
+                                 baseTableName="rel_prestation_soin__financeur_soin"
+                                 constraintName="fk_rel_prestation_soin__financeur_soin__prestation_soin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="prestation_soin"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="financeur_soin_id"
+                                 baseTableName="rel_prestation_soin__financeur_soin"
+                                 constraintName="fk_rel_prestation_soin__financeur_soin__financeur_soin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="financeur_soin"
+                                 />
+    </changeSet>
+</databaseChangeLog>

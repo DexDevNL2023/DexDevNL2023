@@ -1,0 +1,23 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 1,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "accounts",
+    "entities": ["Utilisateur", "Authentification", "Notification", "MedicalDocument", "MedicalRecord"],
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "OGQyYmIzOTIwZTQ2ZmE3ZjM3Yjg0OGEwZDcxMzBjYjkyNDhkYzQzZTJhNDllMWFmMWY1MmYyNTA2YmZlODQ0YWRjYTgzMWE5YWQ0NDgxZDM3ZjU0OTg3NDZhMDNlZmM1NjIwNTQ0ZjQyOWFiNjJiYzA4MGIwMzBkMDQyNGFmN2U=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1719987070000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/teleo/accounts",
+    "packageName": "com.teleo.accounts",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "9001",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20240703061110"
+  },
+  "applications": ["frontend", "accounts"],
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "dateConnexion",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "ipAdresse",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Authentification",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}
