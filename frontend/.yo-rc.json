@@ -1,0 +1,42 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "gateway",
+    "authenticationType": "jwt",
+    "baseName": "frontend",
+    "clientFramework": "angular",
+    "devServerPort": 4200,
+    "entities": [
+      "Utilisateur",
+      "MedicalRecord",
+      "MedicalDocument",
+      "Notification",
+      "Authentification",
+      "Assurance",
+      "Garantie",
+      "Rapport",
+      "PolicesAssurances",
+      "Souscription",
+      "Paiement",
+      "Sinistre",
+      "DocumentDeSinistre",
+      "Reclamation",
+      "Fournisseur",
+      "PrestationSoin",
+      "FinanceurSoin"
+    ],
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "M2I1MDY1MmFhZjNmNjMwN2ZjMzkyMDM3M2RhMzRjYjlhOWZlM2FkMzZlNzhjZWQ1NWQ3ZWVhNjc2Y2Q1ODhhNTg0NzI1ZDcwZDM5MWI5N2NjYjc3MjJlYzA4MDg1M2MwM2ExMTdkMDgwYzAyYzdiZmM3NzgzNmE4ZWU0Y2NiY2Q=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1719987790000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/teleo",
+    "packageName": "com.teleo",
+    "prodDatabaseType": "mysql",
+    "reactive": true,
+    "serverPort": "9000",
+    "serviceDiscoveryType": "consul",
+    "skipCommitHook": true
+  }
+}
