@@ -1,0 +1,237 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-sinistre-heading" data-cy="SinistreCreateUpdateHeading" jhiTranslate="proxyApp.claimsSinistre.home.createOrEditLabel">
+        Create or edit a Sinistre
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="proxyApp.claimsSinistre.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numeroSinistre" jhiTranslate="proxyApp.claimsSinistre.numeroSinistre">Numero Sinistre</label>
+          <input
+            type="text"
+            class="form-control"
+            name="numeroSinistre"
+            id="field_numeroSinistre"
+            data-cy="numeroSinistre"
+            formControlName="numeroSinistre"
+          />
+          @if (
+            editForm.get('numeroSinistre')!.invalid && (editForm.get('numeroSinistre')!.dirty || editForm.get('numeroSinistre')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('numeroSinistre')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDeclaration" jhiTranslate="proxyApp.claimsSinistre.dateDeclaration"
+            >Date Declaration</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateDeclaration"
+              data-cy="dateDeclaration"
+              type="datetime-local"
+              class="form-control"
+              name="dateDeclaration"
+              formControlName="dateDeclaration"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('dateDeclaration')!.invalid && (editForm.get('dateDeclaration')!.dirty || editForm.get('dateDeclaration')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('dateDeclaration')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateDeclaration')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateTraitement" jhiTranslate="proxyApp.claimsSinistre.dateTraitement">Date Traitement</label>
+          <div class="d-flex">
+            <input
+              id="field_dateTraitement"
+              data-cy="dateTraitement"
+              type="datetime-local"
+              class="form-control"
+              name="dateTraitement"
+              formControlName="dateTraitement"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="proxyApp.claimsSinistre.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'proxyApp.ClaimStatus.null' | translate }}</option>
+            @for (claimStatus of claimStatusValues; track $index) {
+              <option [value]="claimStatus">{{ 'proxyApp.ClaimStatus.' + claimStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_raison" jhiTranslate="proxyApp.claimsSinistre.raison">Raison</label>
+          <input type="text" class="form-control" name="raison" id="field_raison" data-cy="raison" formControlName="raison" />
+          @if (editForm.get('raison')!.invalid && (editForm.get('raison')!.dirty || editForm.get('raison')!.touched)) {
+            <div>
+              @if (editForm.get('raison')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_montantReclame" jhiTranslate="proxyApp.claimsSinistre.montantReclame">Montant Reclame</label>
+          <input
+            type="number"
+            class="form-control"
+            name="montantReclame"
+            id="field_montantReclame"
+            data-cy="montantReclame"
+            formControlName="montantReclame"
+          />
+          @if (
+            editForm.get('montantReclame')!.invalid && (editForm.get('montantReclame')!.dirty || editForm.get('montantReclame')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('montantReclame')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('montantReclame')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_montantApprouve" jhiTranslate="proxyApp.claimsSinistre.montantApprouve"
+            >Montant Approuve</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="montantApprouve"
+            id="field_montantApprouve"
+            data-cy="montantApprouve"
+            formControlName="montantApprouve"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_souscriptionId" jhiTranslate="proxyApp.claimsSinistre.souscriptionId">Souscription Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="souscriptionId"
+            id="field_souscriptionId"
+            data-cy="souscriptionId"
+            formControlName="souscriptionId"
+          />
+          @if (
+            editForm.get('souscriptionId')!.invalid && (editForm.get('souscriptionId')!.dirty || editForm.get('souscriptionId')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('souscriptionId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('souscriptionId')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fournisseur" jhiTranslate="proxyApp.claimsSinistre.fournisseur">Fournisseur</label>
+          <select
+            class="form-control"
+            id="field_fournisseur"
+            data-cy="fournisseur"
+            name="fournisseur"
+            formControlName="fournisseur"
+            [compareWith]="compareFournisseur"
+          >
+            <option [ngValue]="null"></option>
+            @for (fournisseurOption of fournisseursSharedCollection; track $index) {
+              <option [ngValue]="fournisseurOption">{{ fournisseurOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_prestationsSoin" jhiTranslate="proxyApp.claimsSinistre.prestationsSoin"
+            >Prestations Soin</label
+          >
+          <select
+            class="form-control"
+            id="field_prestationsSoin"
+            data-cy="prestationsSoin"
+            name="prestationsSoin"
+            formControlName="prestationsSoin"
+            [compareWith]="comparePrestationSoin"
+          >
+            <option [ngValue]="null"></option>
+            @for (prestationSoinOption of prestationSoinsSharedCollection; track $index) {
+              <option [ngValue]="prestationSoinOption">{{ prestationSoinOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (paiement()) {
+      <div>
+        <h2 data-cy="paiementDetailsHeading"><span jhiTranslate="proxyApp.insurancesPaiement.detail.title">Paiement</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ paiement()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insurancesPaiement.datePaiement">Date Paiement</span></dt>
+          <dd>
+            <span>{{ paiement()!.datePaiement | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insurancesPaiement.montant">Montant</span></dt>
+          <dd>
+            <span>{{ paiement()!.montant }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insurancesPaiement.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.PaymentType.' + (paiement()!.type ?? 'null')">{{
+              { null: '', PRIME: 'PRIME', REMBOURSEMENT: 'REMBOURSEMENT' }[paiement()!.type ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insurancesPaiement.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'proxyApp.PaymentStatus.' + (paiement()!.status ?? 'null')">{{
+              { null: '', PENDING: 'PENDING', COMPLETED: 'COMPLETED', FAILED: 'FAILED' }[paiement()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="proxyApp.insurancesPaiement.souscription">Souscription</span></dt>
+          <dd>
+            @if (paiement()!.souscription) {
+              <div>
+                <a [routerLink]="['/souscription', paiement()!.souscription?.id, 'view']">{{ paiement()!.souscription?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/paiement', paiement()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

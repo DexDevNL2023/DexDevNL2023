@@ -1,0 +1,23 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 3,
+    "applicationType": "microservice",
+    "baseName": "claims",
+    "entities": ["Sinistre", "DocumentDeSinistre", "Reclamation", "Fournisseur", "PrestationSoin", "FinanceurSoin"],
+    "gatewayServerPort": "9000",
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "YTliZjNkM2IxOTM0M2NhNTFjM2U1M2YwNTM5ZThiMTYzZTgyZDZiMjQ0MDBjMTljMGQyOGJlNzFjMmQ3OTQxZmExMzI5MGJhOWNiMmRlMTllNDUxNjUyOWRiNDkxN2M5MGNjOWY3NzYxYTIxMDRlNzAzMWUxYWY2MGMwZGU3OWU=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1719996966000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/teleo/claims",
+    "packageName": "com.teleo.claims",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "9003",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true
+  }
+}

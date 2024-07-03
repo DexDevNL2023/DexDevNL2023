@@ -1,0 +1,9 @@
+{
+  "proxyApp": {
+    "PaymentType": {
+      "null": "",
+      "PRIME": "PRIME",
+      "REMBOURSEMENT": "REMBOURSEMENT"
+    }
+  }
+}

@@ -1,0 +1,9 @@
+export enum UserExtraType {
+  CLIENT = 'CLIENT',
+
+  AGENT = 'AGENT',
+
+  ADMINISTRATEUR = 'ADMINISTRATEUR',
+
+  FOURNISSEUR = 'FOURNISSEUR',
+}

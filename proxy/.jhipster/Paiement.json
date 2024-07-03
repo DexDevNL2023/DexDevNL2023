@@ -1,0 +1,47 @@
+{
+  "annotations": {
+    "changelogDate": "20240703090006"
+  },
+  "applications": ["proxy", "insurances"],
+  "clientRootFolder": "insurances",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "datePaiement",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "PaymentType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PRIME,REMBOURSEMENT"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "PaymentStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PENDING,COMPLETED,FAILED"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "insurances",
+  "name": "Paiement",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "souscription",
+      "relationshipName": "souscription",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

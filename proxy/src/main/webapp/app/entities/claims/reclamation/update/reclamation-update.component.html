@@ -1,0 +1,149 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-reclamation-heading"
+        data-cy="ReclamationCreateUpdateHeading"
+        jhiTranslate="proxyApp.claimsReclamation.home.createOrEditLabel"
+      >
+        Create or edit a Reclamation
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="proxyApp.claimsReclamation.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_numeroReclamation" jhiTranslate="proxyApp.claimsReclamation.numeroReclamation"
+            >Numero Reclamation</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroReclamation"
+            id="field_numeroReclamation"
+            data-cy="numeroReclamation"
+            formControlName="numeroReclamation"
+          />
+          @if (
+            editForm.get('numeroReclamation')!.invalid &&
+            (editForm.get('numeroReclamation')!.dirty || editForm.get('numeroReclamation')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('numeroReclamation')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateReclamation" jhiTranslate="proxyApp.claimsReclamation.dateReclamation"
+            >Date Reclamation</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateReclamation"
+              data-cy="dateReclamation"
+              type="datetime-local"
+              class="form-control"
+              name="dateReclamation"
+              formControlName="dateReclamation"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('dateReclamation')!.invalid && (editForm.get('dateReclamation')!.dirty || editForm.get('dateReclamation')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('dateReclamation')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateReclamation')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description" jhiTranslate="proxyApp.claimsReclamation.description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          @if (editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)) {
+            <div>
+              @if (editForm.get('description')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_status" jhiTranslate="proxyApp.claimsReclamation.status">Status</label>
+          <select class="form-control" name="status" formControlName="status" id="field_status" data-cy="status">
+            <option [ngValue]="null">{{ 'proxyApp.ReclamationStatus.null' | translate }}</option>
+            @for (reclamationStatus of reclamationStatusValues; track $index) {
+              <option [value]="reclamationStatus">{{ 'proxyApp.ReclamationStatus.' + reclamationStatus | translate }}</option>
+            }
+          </select>
+          @if (editForm.get('status')!.invalid && (editForm.get('status')!.dirty || editForm.get('status')!.touched)) {
+            <div>
+              @if (editForm.get('status')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sinistre" jhiTranslate="proxyApp.claimsReclamation.sinistre">Sinistre</label>
+          <select
+            class="form-control"
+            id="field_sinistre"
+            data-cy="sinistre"
+            name="sinistre"
+            formControlName="sinistre"
+            [compareWith]="compareSinistre"
+          >
+            <option [ngValue]="null"></option>
+            @for (sinistreOption of sinistresSharedCollection; track $index) {
+              <option [ngValue]="sinistreOption">{{ sinistreOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

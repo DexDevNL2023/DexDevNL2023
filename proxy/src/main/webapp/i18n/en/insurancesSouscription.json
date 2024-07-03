@@ -1,0 +1,35 @@
+{
+  "proxyApp": {
+    "insurancesSouscription": {
+      "home": {
+        "title": "Souscriptions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Souscription",
+        "createOrEditLabel": "Create or edit a Souscription",
+        "search": "Search for Souscription",
+        "notFound": "No Souscriptions found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Souscription {{ id }}?"
+      },
+      "detail": {
+        "title": "Souscription"
+      },
+      "id": "ID",
+      "numeroSouscription": "Numero Souscription",
+      "dateSouscription": "Date Souscription",
+      "status": "Status",
+      "cumulSinistres": "Cumul Sinistres",
+      "frequencePaiement": "Frequence Paiement",
+      "utilisateurId": "Utilisateur Id",
+      "policesAssurances": "Polices Assurances"
+    }
+  },
+  "insurancesApp": {
+    "insurancesSouscription": {
+      "created": "A new Souscription is created with identifier {{ param }}",
+      "updated": "A Souscription is updated with identifier {{ param }}",
+      "deleted": "A Souscription is deleted with identifier {{ param }}"
+    }
+  }
+}

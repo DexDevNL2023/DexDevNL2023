@@ -1,0 +1,11 @@
+{
+  "proxyApp": {
+    "SubscriptionStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "ON_RISK": "ON_RISK",
+      "WATTING": "WATTING",
+      "RESILIE": "RESILIE"
+    }
+  }
+}

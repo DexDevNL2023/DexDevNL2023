@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20240703085406"
+  },
+  "applications": ["proxy", "accounts"],
+  "clientRootFolder": "accounts",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "message",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateEnvoi",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "NotificationType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PAIEMENT,RENOUVELLEMENT,SINISTRE"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "accounts",
+  "name": "Notification",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "userExtra",
+      "relationshipName": "utilisateur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}
