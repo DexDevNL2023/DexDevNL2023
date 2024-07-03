@@ -1,0 +1,197 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-fournisseur-heading"
+        data-cy="FournisseurCreateUpdateHeading"
+        jhiTranslate="accountsApp.claimsFournisseur.home.createOrEditLabel"
+      >
+        Create or edit a Fournisseur
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="accountsApp.claimsFournisseur.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nom" jhiTranslate="accountsApp.claimsFournisseur.nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          @if (editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)) {
+            <div>
+              @if (editForm.get('nom')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_adresse" jhiTranslate="accountsApp.claimsFournisseur.adresse">Adresse</label>
+          <input type="text" class="form-control" name="adresse" id="field_adresse" data-cy="adresse" formControlName="adresse" />
+          @if (editForm.get('adresse')!.invalid && (editForm.get('adresse')!.dirty || editForm.get('adresse')!.touched)) {
+            <div>
+              @if (editForm.get('adresse')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_telephone" jhiTranslate="accountsApp.claimsFournisseur.telephone">Telephone</label>
+          <input type="text" class="form-control" name="telephone" id="field_telephone" data-cy="telephone" formControlName="telephone" />
+          @if (editForm.get('telephone')!.invalid && (editForm.get('telephone')!.dirty || editForm.get('telephone')!.touched)) {
+            <div>
+              @if (editForm.get('telephone')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email" jhiTranslate="accountsApp.claimsFournisseur.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+          @if (editForm.get('email')!.invalid && (editForm.get('email')!.dirty || editForm.get('email')!.touched)) {
+            <div>
+              @if (editForm.get('email')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_addresse" jhiTranslate="accountsApp.claimsFournisseur.addresse">Addresse</label>
+          <input type="text" class="form-control" name="addresse" id="field_addresse" data-cy="addresse" formControlName="addresse" />
+          @if (editForm.get('addresse')!.invalid && (editForm.get('addresse')!.dirty || editForm.get('addresse')!.touched)) {
+            <div>
+              @if (editForm.get('addresse')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ville" jhiTranslate="accountsApp.claimsFournisseur.ville">Ville</label>
+          <input type="text" class="form-control" name="ville" id="field_ville" data-cy="ville" formControlName="ville" />
+          @if (editForm.get('ville')!.invalid && (editForm.get('ville')!.dirty || editForm.get('ville')!.touched)) {
+            <div>
+              @if (editForm.get('ville')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pays" jhiTranslate="accountsApp.claimsFournisseur.pays">Pays</label>
+          <input type="text" class="form-control" name="pays" id="field_pays" data-cy="pays" formControlName="pays" />
+          @if (editForm.get('pays')!.invalid && (editForm.get('pays')!.dirty || editForm.get('pays')!.touched)) {
+            <div>
+              @if (editForm.get('pays')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_servicesFournis" jhiTranslate="accountsApp.claimsFournisseur.servicesFournis"
+            >Services Fournis</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="servicesFournis"
+            id="field_servicesFournis"
+            data-cy="servicesFournis"
+            formControlName="servicesFournis"
+          />
+          @if (
+            editForm.get('servicesFournis')!.invalid && (editForm.get('servicesFournis')!.dirty || editForm.get('servicesFournis')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('servicesFournis')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateDebutContrat" jhiTranslate="accountsApp.claimsFournisseur.dateDebutContrat"
+            >Date Debut Contrat</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateDebutContrat"
+              data-cy="dateDebutContrat"
+              type="datetime-local"
+              class="form-control"
+              name="dateDebutContrat"
+              formControlName="dateDebutContrat"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('dateDebutContrat')!.invalid &&
+            (editForm.get('dateDebutContrat')!.dirty || editForm.get('dateDebutContrat')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('dateDebutContrat')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateDebutContrat')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateFinContrat" jhiTranslate="accountsApp.claimsFournisseur.dateFinContrat"
+            >Date Fin Contrat</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateFinContrat"
+              data-cy="dateFinContrat"
+              type="datetime-local"
+              class="form-control"
+              name="dateFinContrat"
+              formControlName="dateFinContrat"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
