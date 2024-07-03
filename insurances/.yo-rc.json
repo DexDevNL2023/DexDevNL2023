@@ -1,0 +1,23 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 1,
+    "applicationType": "microservice",
+    "baseName": "insurances",
+    "entities": ["Assurance", "Garantie", "Rapport", "PolicesAssurances", "Souscription", "Paiement"],
+    "gatewayServerPort": "9000",
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "MTlmMmFkZTkxZWQwMGU1OWY0NmVkNTlkOTMwZDNlNzQxMWFiM2VhZWE3NTNhYzk1OTU0MTg0NWJiOGQ0NTI0YjQ3MmI2ZTRhY2QxYzc5ZGE0ZGU3OTIyNmViZjgwYjg5NzlhZDJmYmI0NTBhMDg1ZjBiZjRhMTEyYjliZTc2OWY=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1719992791000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/teleo/insurances",
+    "packageName": "com.teleo.insurances",
+    "prodDatabaseType": "postgresql",
+    "serverPort": "9001",
+    "serviceDiscoveryType": "consul",
+    "skipClient": true,
+    "skipCommitHook": true,
+    "skipUserManagement": true
+  }
+}

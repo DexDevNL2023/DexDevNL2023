@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20240703074632"
+  },
+  "applications": ["accounts", "insurances"],
+  "clientRootFolder": "insurances",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "GarantieStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,EXPIREE,SUSPENDUE"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "insurances",
+  "name": "Garantie",
+  "pagination": "infinite-scroll",
+  "relationships": [],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

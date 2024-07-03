@@ -1,0 +1,9 @@
+{
+  "accountsApp": {
+    "PaymentType": {
+      "null": "",
+      "PRIME": "PRIME",
+      "REMBOURSEMENT": "REMBOURSEMENT"
+    }
+  }
+}

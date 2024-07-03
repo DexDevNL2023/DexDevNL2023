@@ -1,0 +1,33 @@
+{
+  "accountsApp": {
+    "insurancesPaiement": {
+      "home": {
+        "title": "Paiements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Paiement",
+        "createOrEditLabel": "Create or edit a Paiement",
+        "search": "Search for Paiement",
+        "notFound": "No Paiements found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Paiement {{ id }}?"
+      },
+      "detail": {
+        "title": "Paiement"
+      },
+      "id": "ID",
+      "datePaiement": "Date Paiement",
+      "montant": "Montant",
+      "type": "Type",
+      "status": "Status",
+      "souscription": "Souscription"
+    }
+  },
+  "insurancesApp": {
+    "insurancesPaiement": {
+      "created": "A new Paiement is created with identifier {{ param }}",
+      "updated": "A Paiement is updated with identifier {{ param }}",
+      "deleted": "A Paiement is deleted with identifier {{ param }}"
+    }
+  }
+}

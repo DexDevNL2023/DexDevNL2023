@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (fournisseur()) {
+      <div>
+        <h2 data-cy="fournisseurDetailsHeading"><span jhiTranslate="accountsApp.claimsFournisseur.detail.title">Fournisseur</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.nom">Nom</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.adresse">Adresse</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.adresse }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.telephone">Telephone</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.telephone }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.email">Email</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.addresse">Addresse</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.addresse }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.ville">Ville</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.ville }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.pays">Pays</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.pays }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.servicesFournis">Services Fournis</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.servicesFournis }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.dateDebutContrat">Date Debut Contrat</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.dateDebutContrat | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFournisseur.dateFinContrat">Date Fin Contrat</span></dt>
+          <dd>
+            <span>{{ fournisseur()!.dateFinContrat | formatMediumDatetime }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/fournisseur', fournisseur()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

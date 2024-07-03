@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (sinistre()) {
+      <div>
+        <h2 data-cy="sinistreDetailsHeading"><span jhiTranslate="accountsApp.claimsSinistre.detail.title">Sinistre</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ sinistre()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.numeroSinistre">Numero Sinistre</span></dt>
+          <dd>
+            <span>{{ sinistre()!.numeroSinistre }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.dateDeclaration">Date Declaration</span></dt>
+          <dd>
+            <span>{{ sinistre()!.dateDeclaration | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.dateTraitement">Date Traitement</span></dt>
+          <dd>
+            <span>{{ sinistre()!.dateTraitement | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.status">Status</span></dt>
+          <dd>
+            <span [jhiTranslate]="'accountsApp.ClaimStatus.' + (sinistre()!.status ?? 'null')">{{
+              { null: '', EN_ATTENTE: 'EN_ATTENTE', APPROUVE: 'APPROUVE', ANNULE: 'ANNULE' }[sinistre()!.status ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.raison">Raison</span></dt>
+          <dd>
+            <span>{{ sinistre()!.raison }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.montantReclame">Montant Reclame</span></dt>
+          <dd>
+            <span>{{ sinistre()!.montantReclame }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.montantApprouve">Montant Approuve</span></dt>
+          <dd>
+            <span>{{ sinistre()!.montantApprouve }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.souscriptionId">Souscription Id</span></dt>
+          <dd>
+            <span>{{ sinistre()!.souscriptionId }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.fournisseur">Fournisseur</span></dt>
+          <dd>
+            @if (sinistre()!.fournisseur) {
+              <div>
+                <a [routerLink]="['/fournisseur', sinistre()!.fournisseur?.id, 'view']">{{ sinistre()!.fournisseur?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsSinistre.prestationsSoin">Prestations Soin</span></dt>
+          <dd>
+            @if (sinistre()!.prestationsSoin) {
+              <div>
+                <a [routerLink]="['/prestation-soin', sinistre()!.prestationsSoin?.id, 'view']">{{ sinistre()!.prestationsSoin?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/sinistre', sinistre()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
