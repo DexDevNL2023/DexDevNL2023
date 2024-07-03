@@ -1,0 +1,126 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-document-de-sinistre-heading"
+        data-cy="DocumentDeSinistreCreateUpdateHeading"
+        jhiTranslate="proxyApp.claimsDocumentDeSinistre.home.createOrEditLabel"
+      >
+        Create or edit a Document De Sinistre
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="proxyApp.claimsDocumentDeSinistre.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nom" jhiTranslate="proxyApp.claimsDocumentDeSinistre.nom">Nom</label>
+          <input type="text" class="form-control" name="nom" id="field_nom" data-cy="nom" formControlName="nom" />
+          @if (editForm.get('nom')!.invalid && (editForm.get('nom')!.dirty || editForm.get('nom')!.touched)) {
+            <div>
+              @if (editForm.get('nom')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_type" jhiTranslate="proxyApp.claimsDocumentDeSinistre.type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+          @if (editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)) {
+            <div>
+              @if (editForm.get('type')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_url" jhiTranslate="proxyApp.claimsDocumentDeSinistre.url">Url</label>
+          <input type="text" class="form-control" name="url" id="field_url" data-cy="url" formControlName="url" />
+          @if (editForm.get('url')!.invalid && (editForm.get('url')!.dirty || editForm.get('url')!.touched)) {
+            <div>
+              @if (editForm.get('url')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_dateTelechargement" jhiTranslate="proxyApp.claimsDocumentDeSinistre.dateTelechargement"
+            >Date Telechargement</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateTelechargement"
+              data-cy="dateTelechargement"
+              type="datetime-local"
+              class="form-control"
+              name="dateTelechargement"
+              formControlName="dateTelechargement"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          @if (
+            editForm.get('dateTelechargement')!.invalid &&
+            (editForm.get('dateTelechargement')!.dirty || editForm.get('dateTelechargement')!.touched)
+          ) {
+            <div>
+              @if (editForm.get('dateTelechargement')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('dateTelechargement')?.errors?.datetimelocal"
+                jhiTranslate="entity.validation.datetimelocal"
+                >This field should be a date and time.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_sinistre" jhiTranslate="proxyApp.claimsDocumentDeSinistre.sinistre">Sinistre</label>
+          <select
+            class="form-control"
+            id="field_sinistre"
+            data-cy="sinistre"
+            name="sinistre"
+            formControlName="sinistre"
+            [compareWith]="compareSinistre"
+          >
+            <option [ngValue]="null"></option>
+            @for (sinistreOption of sinistresSharedCollection; track $index) {
+              <option [ngValue]="sinistreOption">{{ sinistreOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

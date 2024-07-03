@@ -1,0 +1,32 @@
+{
+  "proxyApp": {
+    "accountsMedicalDocument": {
+      "home": {
+        "title": "Medical Documents",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Medical Document",
+        "createOrEditLabel": "Create or edit a Medical Document",
+        "search": "Search for Medical Document",
+        "notFound": "No Medical Documents found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Medical Document {{ id }}?"
+      },
+      "detail": {
+        "title": "Medical Document"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "type": "Type",
+      "url": "Url",
+      "dossierMedical": "Dossier Medical"
+    }
+  },
+  "accountsApp": {
+    "accountsMedicalDocument": {
+      "created": "A new Medical Document is created with identifier {{ param }}",
+      "updated": "A Medical Document is updated with identifier {{ param }}",
+      "deleted": "A Medical Document is deleted with identifier {{ param }}"
+    }
+  }
+}

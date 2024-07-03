@@ -1,0 +1,11 @@
+{
+  "proxyApp": {
+    "UserExtraType": {
+      "null": "",
+      "CLIENT": "CLIENT",
+      "AGENT": "AGENT",
+      "ADMINISTRATEUR": "ADMINISTRATEUR",
+      "FOURNISSEUR": "FOURNISSEUR"
+    }
+  }
+}

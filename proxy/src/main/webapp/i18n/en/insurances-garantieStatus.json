@@ -1,0 +1,10 @@
+{
+  "proxyApp": {
+    "GarantieStatus": {
+      "null": "",
+      "ACTIVE": "ACTIVE",
+      "EXPIREE": "EXPIREE",
+      "SUSPENDUE": "SUSPENDUE"
+    }
+  }
+}

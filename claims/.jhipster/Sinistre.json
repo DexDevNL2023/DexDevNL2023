@@ -1,0 +1,71 @@
+{
+  "annotations": {
+    "changelogDate": "20240703085310"
+  },
+  "applications": ["proxy", "claims"],
+  "clientRootFolder": "claims",
+  "databaseType": "sql",
+  "documentation": "Entities for claim management microservice",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "numeroSinistre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "dateDeclaration",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateTraitement",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ClaimStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EN_ATTENTE,APPROUVE,ANNULE"
+    },
+    {
+      "fieldName": "raison",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "montantReclame",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "montantApprouve",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "souscriptionId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "claims",
+  "name": "Sinistre",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "fournisseur",
+      "relationshipName": "fournisseur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "prestationSoin",
+      "relationshipName": "prestationsSoin",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

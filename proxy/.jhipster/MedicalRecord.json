@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20240703085410"
+  },
+  "applications": ["proxy", "accounts"],
+  "clientRootFolder": "accounts",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "numMedicalRecord",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "details",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateUpdated",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "accounts",
+  "name": "MedicalRecord",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "userExtra",
+      "relationshipName": "utilisateur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}
