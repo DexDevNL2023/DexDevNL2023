@@ -1,0 +1,33 @@
+{
+  "accountsApp": {
+    "insurancesGarantie": {
+      "home": {
+        "title": "Garanties",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Garantie",
+        "createOrEditLabel": "Create or edit a Garantie",
+        "search": "Search for Garantie",
+        "notFound": "No Garanties found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Garantie {{ id }}?"
+      },
+      "detail": {
+        "title": "Garantie"
+      },
+      "id": "ID",
+      "description": "Description",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "status": "Status",
+      "assurance": "Assurance"
+    }
+  },
+  "insurancesApp": {
+    "insurancesGarantie": {
+      "created": "A new Garantie is created with identifier {{ param }}",
+      "updated": "A Garantie is updated with identifier {{ param }}",
+      "deleted": "A Garantie is deleted with identifier {{ param }}"
+    }
+  }
+}

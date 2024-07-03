@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20240703074853"
+  },
+  "applications": ["accounts", "claims"],
+  "clientRootFolder": "claims",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "numeroReclamation",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "dateReclamation",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ReclamationStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EN_COURS,RESOLUE,REJETEE"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "claims",
+  "name": "Reclamation",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "sinistre",
+      "relationshipName": "sinistre",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

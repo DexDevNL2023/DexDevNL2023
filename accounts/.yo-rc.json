@@ -1,0 +1,48 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "gateway",
+    "applications": {
+      "claims": {
+        "applicationIndex": 2,
+        "serverPort": "9002"
+      },
+      "insurances": {
+        "applicationIndex": 1,
+        "serverPort": "9001"
+      }
+    },
+    "baseName": "accounts",
+    "devServerPort": 4200,
+    "entities": [
+      "UserExtra",
+      "MedicalRecord",
+      "MedicalDocument",
+      "Notification",
+      "Assurance",
+      "Garantie",
+      "Rapport",
+      "PolicesAssurances",
+      "Souscription",
+      "Paiement",
+      "Sinistre",
+      "DocumentDeSinistre",
+      "Reclamation",
+      "Fournisseur",
+      "PrestationSoin",
+      "FinanceurSoin"
+    ],
+    "jhipsterVersion": "8.6.0",
+    "jwtSecretKey": "MDA2M2Q1ZjM1M2E1ZjA0NWNkZTNlMzQ5MjJlY2E5MGVhNTMwMzNmNWJlZmM0YzkwYjMwNDJhYTYxOTQ2ZGVmZmQ2ODZiZDNjMjc5NDMwMzNjN2NjMjY1Yjk0Y2FlMTFlNTNkY2I0MjYwODIxMTM3Yzg5NDI0YzFkYzI5YjNiNjM=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1719993113000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/teleo/accounts",
+    "packageName": "com.teleo.accounts",
+    "reactive": true,
+    "serverPort": "9000",
+    "serviceDiscoveryType": "consul",
+    "skipCommitHook": true
+  }
+}

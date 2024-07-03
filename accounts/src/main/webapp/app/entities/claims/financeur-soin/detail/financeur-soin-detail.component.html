@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (financeurSoin()) {
+      <div>
+        <h2 data-cy="financeurSoinDetailsHeading">
+          <span jhiTranslate="accountsApp.claimsFinanceurSoin.detail.title">Financeur Soin</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ financeurSoin()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFinanceurSoin.nom">Nom</span></dt>
+          <dd>
+            <span>{{ financeurSoin()!.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFinanceurSoin.type">Type</span></dt>
+          <dd>
+            <span [jhiTranslate]="'accountsApp.FinanceurType.' + (financeurSoin()!.type ?? 'null')">{{
+              { null: '', ASSUREUR: 'ASSUREUR', MUTUELLE: 'MUTUELLE', ORGANISME_PUBLIC: 'ORGANISME_PUBLIC' }[
+                financeurSoin()!.type ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFinanceurSoin.adresse">Adresse</span></dt>
+          <dd>
+            <span>{{ financeurSoin()!.adresse }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFinanceurSoin.telephone">Telephone</span></dt>
+          <dd>
+            <span>{{ financeurSoin()!.telephone }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFinanceurSoin.email">Email</span></dt>
+          <dd>
+            <span>{{ financeurSoin()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFinanceurSoin.servicesFournis">Services Fournis</span></dt>
+          <dd>
+            <span>{{ financeurSoin()!.servicesFournis }}</span>
+          </dd>
+          <dt><span jhiTranslate="accountsApp.claimsFinanceurSoin.prestationSoin">Prestation Soin</span></dt>
+          <dd>
+            @for (prestationSoin of financeurSoin()!.prestationSoins; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/prestation-soin', prestationSoin.id, 'view']">{{ prestationSoin?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/financeur-soin', financeurSoin()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

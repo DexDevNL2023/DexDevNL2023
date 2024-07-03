@@ -1,0 +1,38 @@
+{
+  "accountsApp": {
+    "claimsSinistre": {
+      "home": {
+        "title": "Sinistres",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sinistre",
+        "createOrEditLabel": "Create or edit a Sinistre",
+        "search": "Search for Sinistre",
+        "notFound": "No Sinistres found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Sinistre {{ id }}?"
+      },
+      "detail": {
+        "title": "Sinistre"
+      },
+      "id": "ID",
+      "numeroSinistre": "Numero Sinistre",
+      "dateDeclaration": "Date Declaration",
+      "dateTraitement": "Date Traitement",
+      "status": "Status",
+      "raison": "Raison",
+      "montantReclame": "Montant Reclame",
+      "montantApprouve": "Montant Approuve",
+      "souscriptionId": "Souscription Id",
+      "fournisseur": "Fournisseur",
+      "prestationsSoin": "Prestations Soin"
+    }
+  },
+  "claimsApp": {
+    "claimsSinistre": {
+      "created": "A new Sinistre is created with identifier {{ param }}",
+      "updated": "A Sinistre is updated with identifier {{ param }}",
+      "deleted": "A Sinistre is deleted with identifier {{ param }}"
+    }
+  }
+}

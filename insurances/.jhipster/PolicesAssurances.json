@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20240703073952"
+  },
+  "applications": ["accounts", "insurances"],
+  "clientRootFolder": "insurances",
+  "databaseType": "sql",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "numeroPolice",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "dateEmission",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateExpiration",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "montantAssure",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "plafondAssure",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "microserviceName": "insurances",
+  "name": "PolicesAssurances",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "assurance",
+      "relationshipName": "assurance",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

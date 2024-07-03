@@ -1,0 +1,10 @@
+{
+  "accountsApp": {
+    "ClaimStatus": {
+      "null": "",
+      "EN_ATTENTE": "EN_ATTENTE",
+      "APPROUVE": "APPROUVE",
+      "ANNULE": "ANNULE"
+    }
+  }
+}
